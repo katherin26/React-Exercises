@@ -1,4 +1,5 @@
 import React from "react";
+import Product from "./Product";
 
 export default function Main(props) {
   const { products } = props;
@@ -7,7 +8,7 @@ export default function Main(props) {
       <h2>Products</h2>
       <div className="row">
         {products.map((product) => (
-          <Product key={product.id} product={product} />
+          <Product key={product.id} product={product}></Product>
         ))}
       </div>
     </main>

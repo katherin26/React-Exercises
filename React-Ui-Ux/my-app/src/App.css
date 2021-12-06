@@ -49,3 +49,10 @@ a {
     rgba(4, 12, 24, 1) 25%
   );
 }
+
+.gradient__text {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clop: text;
+  -webkit-text-fill-color: transparent;
+}

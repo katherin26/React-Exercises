@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 
 import Form from "../Form/Form";
 import Card from "../Card/Card";
+import Map from "../Map/Map";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -28,7 +29,9 @@ export default function BasicGrid() {
           </Item>
         </Grid>
         <Grid item xs={8}>
-          <Item>map</Item>
+          <Item>
+            <Map />
+          </Item>
         </Grid>
       </Grid>
     </Box>

@@ -6,6 +6,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 import Form from "../Form/Form";
+import Card from "../Card/Card";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -21,6 +22,9 @@ export default function BasicGrid() {
         <Grid item xs={4}>
           <Item>
             <Form />
+          </Item>
+          <Item>
+            <Card />
           </Item>
         </Grid>
         <Grid item xs={8}>

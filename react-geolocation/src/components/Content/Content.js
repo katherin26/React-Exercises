@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 
 import Form from "../Form/Form";
 import Card from "../Card/Card";
-import Map from "../Map/Map";
+import Map from "../Map/MapFn";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,

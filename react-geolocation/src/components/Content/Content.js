@@ -16,21 +16,54 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function BasicGrid() {
+export default function Content() {
+  const [values, setValues] = React.useState({
+    workout: "Cycling",
+    distance: "",
+    duration: "",
+    cadence: "",
+  });
+
+  const [workouts, setWorkouts] = React.useState([]);
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+    console.log(prop, event);
+  };
+
+  const handleAddNewWorkout = () => {
+    if (
+      values.workout &&
+      values.distance &&
+      values.duration &&
+      values.cadence
+    ) {
+      setWorkouts([...workouts, values]);
+    } else {
+      console.log(`datanoready`);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Item>
-            <Form />
+            <Form
+              values={values}
+              handleChange={handleChange}
+              handleAddNewWorkout={handleAddNewWorkout}
+            />
           </Item>
           <Item>
-            <Card />
+            {workouts.map((workout) => (
+              <Card values={workout} />
+            ))}
           </Item>
         </Grid>
         <Grid item xs={8}>
           <Item>
-            <Map />
+            <Map values={values} />
           </Item>
         </Grid>
       </Grid>

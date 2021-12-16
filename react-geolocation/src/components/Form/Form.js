@@ -17,66 +17,38 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Select } from "@mui/material";
 
-const currencies = [
+const workoutList = [
   {
-    value: "USD",
-    label: "$",
+    label: "Cycling",
+    value: "Cycling",
   },
   {
-    value: "EUR",
-    label: "€",
-  },
-  {
-    value: "BTC",
-    label: "฿",
-  },
-  {
-    value: "JPY",
-    label: "¥",
+    label: "Running",
+    value: "Running",
   },
 ];
 
-export default function InputAdornments() {
-  const [values, setValues] = React.useState({
-    amount: "",
-    distance: "",
-    duration: "",
-    cadence: "",
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const [currency, setCurrency] = React.useState("EUR");
-
-  const handleChange2 = (event) => {
-    setCurrency(event.target.value);
-  };
+export default function Form({ values, handleChange, handleAddNewWorkout }) {
+  const [workout, setWorkout] = React.useState("Workout");
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       <div>
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-          <TextField
-            id="outlined-select-currency"
-            select
+          <Select
+            id="outlined-select-workout"
             label="Select"
-            value={currency}
-            onChange={handleChange}
-            helperText="Please select your currency"
+            value={values.workout}
+            onChange={handleChange("workout")}
           >
-            {currencies.map((option) => (
+            {workoutList.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </FormControl>
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <OutlinedInput
@@ -126,6 +98,9 @@ export default function InputAdornments() {
           </FormHelperText>
         </FormControl>
       </div>
+      <Button name="add" variant="contained" onClick={handleAddNewWorkout}>
+        Add New
+      </Button>
     </Box>
   );
 }

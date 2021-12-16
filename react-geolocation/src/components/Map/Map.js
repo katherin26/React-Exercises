@@ -49,7 +49,12 @@ export default class Map extends React.Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[this.state.latitude, this.state.longitude]}>
-              <Popup></Popup>
+              <Popup>
+                {this.props.values.workout}
+                Distance : {this.props.values.distance}
+                Duration : {this.props.values.duration}
+                Cadence : {this.props.values.cadence}
+              </Popup>
             </Marker>
           </MapContainer>
         )}

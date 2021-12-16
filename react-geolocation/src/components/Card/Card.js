@@ -15,21 +15,20 @@ const bull = (
   </Box>
 );
 
-const card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        TYPE OF ACTIVITY
-      </Typography>
-      <Typography variant="body2">km - Distance - Minutes - Meters</Typography>
-    </CardContent>
-  </React.Fragment>
-);
-
-export default function OutlinedCard() {
+export default function AppCard({ values }) {
   return (
     <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">{card}</Card>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography sx={{ mb: 1.5 }} color="text.primary">
+            {values.workout}
+          </Typography>
+          <Typography variant="body2">
+            {values.distance} Km - {values.duration} Distance - {values.cadence}
+            Cadence
+          </Typography>
+        </CardContent>
+      </Card>
     </Box>
   );
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -17,18 +17,26 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Content() {
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     workout: "Cycling",
     distance: "",
     duration: "",
     cadence: "",
   });
 
-  const [workouts, setWorkouts] = React.useState([]);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+
+  const [workouts, setWorkouts] = useState([]);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
     console.log(prop, event);
+  };
+
+  const updateLocation = (lat, lng) => {
+    setLongitude(lng);
+    setLatitude(lat);
   };
 
   const handleAddNewWorkout = () => {
@@ -63,7 +71,12 @@ export default function Content() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-            <Map values={values} />
+            <Map
+              values={values}
+              latitude={latitude}
+              longitude={longitude}
+              updateLocation={updateLocation}
+            />
           </Item>
         </Grid>
       </Grid>

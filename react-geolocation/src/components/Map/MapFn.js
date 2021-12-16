@@ -16,28 +16,19 @@ function MyComponent({ updateLocation }) {
   return null;
 }
 
-export default function MapFn({ values }) {
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
-
+export default function MapFn({ values, latitude, longitude, updateLocation }) {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           if (!position) return;
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
+          updateLocation(position.coords.latitude, position.coords.longitude);
         },
         (e) => console.log("error", e)
       );
     } else {
       alert(`Geolocation is not suported by this browser.`);
     }
-  }
-
-  function updateLocation(lat, lng) {
-    setLatitude(lat);
-    setLongitude(lng);
   }
 
   useEffect(() => {

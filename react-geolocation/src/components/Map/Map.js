@@ -5,25 +5,55 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      latitude: null,
+      longitude: null,
+    };
+    this.getLocation = this.getLocation.bind(this);
+    this.getCoordinates = this.getCoordinates.bind(this);
+  }
+
+  componentDidMount() {
+    this.getLocation();
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates, (e) =>
+        console.log("error", e)
+      );
+    } else {
+      alert(`Geolocation is not suported by this browser.`);
+    }
+  }
+
+  getCoordinates(position) {
+    if (!position) return;
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
   }
 
   render() {
     return (
-      <MapContainer
-        style={{ width: "100%", height: "50vh" }}
-        center={[51.505, -0.09]}
-        zoom={13}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </MapContainer>
+      <>
+        {this.state.latitude && this.state.longitude && (
+          <MapContainer
+            style={{ width: "100%", height: "85vh" }}
+            center={[this.state.latitude, this.state.longitude]}
+            zoom={13}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[this.state.latitude, this.state.longitude]}>
+              <Popup></Popup>
+            </Marker>
+          </MapContainer>
+        )}
+      </>
     );
   }
 }

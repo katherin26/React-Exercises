@@ -13,12 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
 function Header(props) {
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,12 +28,12 @@ function Header(props) {
         <FormControlLabel
           control={
             <Switch
-              checked={auth}
-              onChange={handleChange}
+              checked={props.auth}
+              onChange={props.handleChange}
               aria-label="login switch"
             />
           }
-          label={auth ? "Logout" : "Login"}
+          label={props.auth ? "Logout" : "Login"}
         />
       </FormGroup>
       <AppBar position="static">
@@ -55,7 +50,7 @@ function Header(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {props.name}
           </Typography>
-          {auth && (
+          {props.auth && (
             <div>
               <IconButton
                 size="large"

@@ -34,7 +34,7 @@ export default function Form({ values, handleChange, handleAddNewWorkout }) {
   const [workout, setWorkout] = React.useState("Workout");
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end" }}>
       <div>
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <Select
@@ -98,7 +98,12 @@ export default function Form({ values, handleChange, handleAddNewWorkout }) {
           </FormHelperText>
         </FormControl>
       </div>
-      <Button name="add" variant="contained" onClick={handleAddNewWorkout}>
+      <Button
+        name="add"
+        variant="contained"
+        onClick={handleAddNewWorkout}
+        sx={{ boxShadow: 1 }}
+      >
         Add New
       </Button>
     </Box>

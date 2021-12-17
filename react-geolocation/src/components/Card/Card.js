@@ -5,6 +5,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import RunCircleIcon from "@mui/icons-material/RunCircle";
 
 const bull = (
   <Box
@@ -20,11 +22,12 @@ export default function AppCard({ values }) {
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">
         <CardContent>
-          <Typography sx={{ mb: 1.5 }} color="text.primary">
+          <Typography sx={{ mb: 1.5, fontWeight: "bold" }} color="text.primary">
+            <RunCircleIcon color="primary" />
             {values.workout}
           </Typography>
-          <Typography variant="body2">
-            {values.distance} Km - {values.duration} Distance - {values.cadence}
+          <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            {values.distance} Km - {values.duration} Min - {values.cadence}{" "}
             Cadence
           </Typography>
         </CardContent>

@@ -9,6 +9,9 @@ import Form from "../Form/Form";
 import Card from "../Card/Card";
 import Map from "../Map/MapFn";
 
+//esta function me va a retornar lo que me devuelva el api en el backend.
+import { getWorkouts } from "../../services/api";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -46,7 +49,7 @@ export default function Content() {
       values.duration &&
       values.cadence
     ) {
-      setWorkouts([...workouts, values]);
+      setWorkouts([...workouts, { ...values, latitude, longitude }]);
     } else {
       console.log(`datanoready`);
     }
@@ -64,8 +67,8 @@ export default function Content() {
             />
           </Item>
           <Item>
-            {workouts.map((workout) => (
-              <Card values={workout} />
+            {workouts.map((workout, i) => (
+              <Card key={i} values={workout} />
             ))}
           </Item>
         </Grid>
@@ -76,6 +79,7 @@ export default function Content() {
               latitude={latitude}
               longitude={longitude}
               updateLocation={updateLocation}
+              markers={workouts}
             />
           </Item>
         </Grid>

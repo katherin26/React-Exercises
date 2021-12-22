@@ -16,7 +16,13 @@ function MyComponent({ updateLocation }) {
   return null;
 }
 
-export default function MapFn({ values, latitude, longitude, updateLocation }) {
+export default function MapFn({
+  values,
+  latitude,
+  longitude,
+  updateLocation,
+  markers,
+}) {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -55,6 +61,16 @@ export default function MapFn({ values, latitude, longitude, updateLocation }) {
               Cadence : {values.cadence}
             </Popup>
           </Marker>
+          {markers.map((marker, i) => (
+            <Marker key={i} position={[marker.latitude, marker.longitude]}>
+              <Popup>
+                {marker.workout}
+                Distance : {marker.distance}
+                Duration : {marker.duration}
+                Cadence : {marker.cadence}
+              </Popup>
+            </Marker>
+          ))}
           <MyComponent updateLocation={updateLocation} />
         </MapContainer>
       )}

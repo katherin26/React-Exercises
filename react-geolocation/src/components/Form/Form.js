@@ -25,8 +25,6 @@ const workoutList = [
 ];
 
 export default function Form({ values, handleChange, handleAddNewWorkout }) {
-  const [workout, setWorkout] = React.useState("Workout");
-
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end" }}>
       <div>

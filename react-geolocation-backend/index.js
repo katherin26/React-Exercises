@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require("cors");
 const app = express();
 const port = 3001;
 const pets = [
@@ -6,6 +7,15 @@ const pets = [
   { name: "dog", id: 2 },
 ];
 const workouts = [];
+
+//habilitar cors
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
+app.use(express.json()); //habilitar para recibir data json
 
 app.get("/pets", (req, res) => {
   res.send(JSON.stringify(pets));
@@ -22,12 +32,14 @@ app.get("/pets/:id", function (req, res) {
 });
 
 app.get("/workouts", (req, res) => {
-  res.send(JSON.stringify(workouts));
+  res.send(workouts);
 });
 
 //create a new workout
 
 app.post("/workouts", (req, res) => {
+  console.log(req.body);
+  workouts.push(req.body);
   res.send(`Workout created!`);
 });
 

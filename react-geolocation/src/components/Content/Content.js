@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import Card from "../Card/Card";
 import Map from "../Map/MapFn";
 
 //esta function me va a retornar lo que me devuelva el api en el backend.
-import { getWorkouts } from "../../services/api";
+import { getWorkouts, createWorkout } from "../../services/api";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -42,18 +42,41 @@ export default function Content() {
     setLatitude(lat);
   };
 
-  const handleAddNewWorkout = () => {
-    if (
-      values.workout &&
-      values.distance &&
-      values.duration &&
-      values.cadence
-    ) {
-      setWorkouts([...workouts, { ...values, latitude, longitude }]);
-    } else {
-      console.log(`datanoready`);
+  const loadWorkouts = async () => {
+    try {
+      const response = await getWorkouts();
+      console.log(response);
+      setWorkouts(response.data);
+    } catch (e) {
+      console.error(e);
     }
   };
+
+  const handleAddNewWorkout = async () => {
+    try {
+      if (
+        values.workout &&
+        values.distance &&
+        values.duration &&
+        values.cadence
+      ) {
+        const response = await createWorkout({
+          ...values,
+          latitude,
+          longitude,
+        });
+        console.log(response);
+        await loadWorkouts();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    loadWorkouts();
+    console.log(`something change`);
+  }, []); //cargar todos los workouts que estan en el servidor una vez. cuando se monta el content component.
 
   return (
     <Box sx={{ flexGrow: 1 }}>

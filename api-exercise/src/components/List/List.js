@@ -4,27 +4,28 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 export default function ListComponent(props) {
+  console.log(props);
   return (
     <>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Mold Spores Level : {props.data.mold_level}
+            Mold Spores Level (0-50): {props.data.mold_level} spores.
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Aqi : {props.data.aqi}
+            Air Quality (0 - 50) : {props.data.aqi}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            pm10 : {props.data.pm10}
+            Particulate Matter-10 (0-50) : {props.data.pm10} (μg/m3).
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            co : {props.data.co}
+            Carbon Monoxide (0- 50): {props.data.co}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Type of Pollen : {props.data.predominant_pollen_type}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            so2 : {props.data.so2}
+            Sulfur Dioxide (0 - 0.10): {props.data.so2} ppm.
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Pollen level tree : {props.data.pollen_level_tree}
@@ -33,10 +34,10 @@ export default function ListComponent(props) {
             Pollen level weed : {props.data.pollen_level_weed}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            No2 : {props.data.no2}
+            Nitrogen Dioxide (0 - 50) : {props.data.no2} ppb.
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            pm25 : {props.data.pm25}
+            Particular Matter-2.5 (0 - 12.0) : {props.data.pm25} (μg/m3).
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Pollen level grass : {props.data.pollen_level_grass}

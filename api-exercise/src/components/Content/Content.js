@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import ButtonComponent from "../Button/Button";
@@ -6,7 +6,7 @@ import ListComponent from "../List/List";
 import { getAirQuality } from "../../services/api";
 
 function Content() {
-  const [list, setList] = React.useState();
+  const [list, setList] = useState(null);
 
   const listHandler = async () => {
     const result = await getAirQuality();
@@ -23,7 +23,7 @@ function Content() {
         }}
       >
         <ButtonComponent fn={() => listHandler()} />
-        <ListComponent data={list} />
+        {list && <ListComponent data={list} />}
       </Box>
     </Container>
   );

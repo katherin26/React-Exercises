@@ -4,8 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 export default function ListComponent(props) {
-  console.log(`Im props dta`);
-  console.log(props.data);
   return (
     <>
       <Card sx={{ minWidth: 275 }}>

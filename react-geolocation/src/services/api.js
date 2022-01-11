@@ -10,13 +10,13 @@ export function createWorkout(workout) {
   return axios.post(`${apiUrl}/workouts`, workout);
 }
 
-export async function getAirQuality() {
+export async function getAirQuality(lat, lon) {
   const response = await axios.get(
     `https://air-quality.p.rapidapi.com/current/airquality`,
     {
       params: {
-        lat: "403746746",
-        lon: "-743030246",
+        lat,
+        lon,
       },
       headers: {
         "x-rapidapi-host": "air-quality.p.rapidapi.com",

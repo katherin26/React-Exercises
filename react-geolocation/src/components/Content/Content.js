@@ -10,7 +10,7 @@ import Card from "../Card/Card";
 import Map from "../Map/MapFn";
 
 //esta function me va a retornar lo que me devuelva el api en el backend.
-import { getWorkouts, createWorkout } from "../../services/api";
+import { getWorkouts, createWorkout, getAirQuality } from "../../services/api";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -73,10 +73,24 @@ export default function Content() {
     }
   };
 
+  const updateAirQuality = async () => {
+    try {
+      const response = await getAirQuality(latitude, longitude);
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     loadWorkouts();
     console.log(`something change`);
   }, []); //cargar todos los workouts que estan en el servidor una vez. cuando se monta el content component.
+
+  useEffect(() => {
+    updateAirQuality();
+    console.log(`Latitud and longitude change`);
+  }, [latitude, longitude]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

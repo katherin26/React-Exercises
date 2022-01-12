@@ -34,8 +34,6 @@ export default function Content() {
   const [longitude, setLongitude] = useState();
   const [workouts, setWorkouts] = useState([]);
   const [list, setList] = useState(null);
-  console.log(`Soy list`);
-  console.log(list);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -50,7 +48,6 @@ export default function Content() {
   const loadWorkouts = async () => {
     try {
       const response = await getWorkouts();
-      console.log(response);
       setWorkouts(response.data);
     } catch (e) {
       console.error(e);
@@ -70,7 +67,6 @@ export default function Content() {
           latitude,
           longitude,
         });
-        console.log(response);
         await loadWorkouts();
       }
     } catch (e) {
@@ -90,13 +86,10 @@ export default function Content() {
   const listHandler = async () => {
     const result = await getAirQuality(latitude, longitude);
     setList(result.data[0]);
-    console.log(`soy result`);
-    console.log(result);
   };
 
   useEffect(() => {
     loadWorkouts();
-    console.log(`something change`);
   }, []); //cargar todos los workouts que estan en el servidor una vez. cuando se monta el content component.
 
   return (

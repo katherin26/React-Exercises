@@ -9,6 +9,9 @@ import Form from "../Form/Form";
 import Card from "../Card/Card";
 import Map from "../Map/MapFn";
 
+import ButtonComponent from "../Button/Button";
+import ListComponent from "../List/List";
+
 //esta function me va a retornar lo que me devuelva el api en el backend.
 import { getWorkouts, createWorkout, getAirQuality } from "../../services/api";
 
@@ -29,8 +32,10 @@ export default function Content() {
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-
   const [workouts, setWorkouts] = useState([]);
+  const [list, setList] = useState(null);
+  console.log(`Soy list`);
+  console.log(list);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -82,15 +87,17 @@ export default function Content() {
     }
   };
 
+  const listHandler = async () => {
+    const result = await getAirQuality(latitude, longitude);
+    setList(result.data[0]);
+    console.log(`soy result`);
+    console.log(result);
+  };
+
   useEffect(() => {
     loadWorkouts();
     console.log(`something change`);
   }, []); //cargar todos los workouts que estan en el servidor una vez. cuando se monta el content component.
-
-  useEffect(() => {
-    updateAirQuality();
-    console.log(`Latitud and longitude change`);
-  }, [latitude, longitude]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -102,6 +109,8 @@ export default function Content() {
               handleChange={handleChange}
               handleAddNewWorkout={handleAddNewWorkout}
             />
+            <ButtonComponent fn={() => listHandler()} />
+            {list && <ListComponent data={list} />}
           </Item>
           <Item>
             {workouts.map((workout, i) => (

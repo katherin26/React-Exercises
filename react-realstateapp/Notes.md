@@ -11,3 +11,14 @@
  8. **Gallery of images** = react-horizontal-scrolling-menu
  9. **React icons** = react-icons
 ```
+
+## **npm run dev**
+
+## **next.config.js file**
+
+**For the images we need to set the next.config.js**
+**add images**: {
+domains:["and the url"]
+}
+
+**But wee need to set the config so stop the terminal and run it again**

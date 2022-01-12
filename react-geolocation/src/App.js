@@ -6,7 +6,7 @@ import Form from "./components/Form/Form";
 function App() {
   return (
     <div className="App">
-      <Header name="Geolocation Project" />
+      <Header name="Geolocation Project by Katherin Ochoa 2022" />
       <Content />
     </div>
   );

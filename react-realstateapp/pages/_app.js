@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "../components/Layout";
 
 //This structure is always used in next.js
+//In the documentation about chakra in the Set Up Provider we can find that we need to wrap all with the <ChakraProvider>
 
 function MyApp({ Component, pageProps }) {
   return (

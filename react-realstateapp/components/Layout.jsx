@@ -9,6 +9,9 @@ const Layout = ({ children }) => (
     <Box maxWidth="1280px" m="auto">
       <header>Navbar</header>
       <main>{children}</main>
+      <footer>Footer</footer>
     </Box>
   </>
 );
+
+export default Layout;

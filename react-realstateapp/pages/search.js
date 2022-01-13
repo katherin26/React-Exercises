@@ -3,6 +3,7 @@ import { useRouter } from "next/router"; //Library router but in next.
 import Image from "next/image";
 import { Flex, Box, Text, Icon } from "@chakra-ui/react";
 import { BsFilter } from "react-icons/bs";
+import SearchFilters from "../components/SearchFilters";
 
 //stateProperty = searchFilter, setSearchFilters
 //onClick={() => setSearchFilter((prevFilters) => !prevFilters)} = this means that if we are currently filtering something
@@ -32,7 +33,7 @@ const Search = () => {
         <Text>Search Property By Filters</Text>
         <Icon paddingLeft="2" w="7" as={BsFilter} />
       </Flex>
-      {setSearchFilters && <searchFilters />}
+      {searchFilters && <SearchFilters />}
     </Box>
   );
 };

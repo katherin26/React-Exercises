@@ -28,6 +28,14 @@ import noresult from "../assets/images/noresult.png";
 //We are populated the value through getStaticProps()  and we are going to filter to query.
 //the default value is after the || for example "for rent".
 
+//getServerProps(): Next offers a few of these great let's call them utility function you call these below
+//your components and they completely change the way that component is rendered. In the documentation we find
+//Two forms of pre-rendering static generation :
+
+//Static generation  : `getStaticProps() fetch data at build time.
+//Static generation : `getStaticPaths() Specify dynamic routers to pre-render pages based on data.
+//Server-Side-Rendering : `getServerSideProps() Fetch data on each request.
+
 const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
   const router = useRouter(); //We call it as a hook.
@@ -77,7 +85,9 @@ const Search = ({ properties }) => {
   );
 };
 
-export async function getStaticProps({ query }) {
+export default Search;
+
+export async function getServerSideProps({ query }) {
   const purpose = query.purpose || "for-rent";
   const rentFrequency = query.rentFrequency || "yearly";
   const minPrice = query.minPrice || "0";
@@ -92,11 +102,10 @@ export async function getStaticProps({ query }) {
   const data = await fetchApi(
     `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
   );
+
   return {
     props: {
-      properties: data?history,
+      properties: data?.hits,
     },
   };
 }
-
-export default Search;

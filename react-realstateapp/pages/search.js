@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Flex, Box, Text, Icon } from "@chakra-ui/react";
 import { BsFilter } from "react-icons/bs";
 import SearchFilters from "../components/SearchFilters";
+import Property from "../components/Property";
+import noresult from "../assets/images/noresult.png";
 
 //stateProperty = searchFilter, setSearchFilters
 //onClick={() => setSearchFilter((prevFilters) => !prevFilters)} = this means that if we are currently filtering something
@@ -14,11 +16,21 @@ import SearchFilters from "../components/SearchFilters";
 //Next router : router contains the url if we go to rent properties then that's going to be contained in the url.
 //and if you going to boy properties that's also going to be contained in the url.
 
-//Buy properties = search?purpose-for-sale
+//Buy properties = search?purpose-for-sale in the code line = 42 properties {router.query.purpose}
 
-const Search = () => {
+//Map into all the properties = {[].map((property) => <Property key={property})} /> for each property we simply
+//render a property component.
+
+//[].length === 0 && = If properties.length is equal to 0 meaning if there are no properties in that case
+//we can simply render a new flex container like <Flex></Flex>
+
+//We are getting our properties throgh props.
+//We are populated the value through getStaticProps()
+
+const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
   const router = useRouter(); //We call it as a hook.
+  console.log(router);
 
   return (
     <Box>
@@ -39,8 +51,27 @@ const Search = () => {
       </Flex>
       {searchFilters && <SearchFilters />}
       <Text fontSize="2x1" p="4" fontWeight="bold">
-        Properties
+        Properties {router.query.purpose}
       </Text>
+      <Flex flexWrap="wrap">
+        {properties.map((property) => (
+          <Property property={property} key={property.id} />
+        ))}
+      </Flex>
+      {properties.length === 0 && (
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          marginTop="5"
+          marginBottom="5"
+        >
+          <Image alt="no result" src={noresult} width="100px" height="100px" />
+          <Text fontSize="2x1" marginTop="3">
+            No Results found
+          </Text>
+        </Flex>
+      )}
     </Box>
   );
 };

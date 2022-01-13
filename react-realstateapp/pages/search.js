@@ -11,6 +11,10 @@ import SearchFilters from "../components/SearchFilters";
 
 //Now we are going to say if there are search filters we can do this by saying search filters and end then
 //we are going to render the search filters component.
+//Next router : router contains the url if we go to rent properties then that's going to be contained in the url.
+//and if you going to boy properties that's also going to be contained in the url.
+
+//Buy properties = search?purpose-for-sale
 
 const Search = () => {
   const [searchFilters, setSearchFilters] = useState(false);
@@ -34,6 +38,9 @@ const Search = () => {
         <Icon paddingLeft="2" w="7" as={BsFilter} />
       </Flex>
       {searchFilters && <SearchFilters />}
+      <Text fontSize="2x1" p="4" fontWeight="bold">
+        Properties
+      </Text>
     </Box>
   );
 };

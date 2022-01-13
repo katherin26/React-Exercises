@@ -1,4 +1,4 @@
-import { Link } from "next/link";
+import Link from "next/link";
 import {
   Menu,
   MenuButton,
@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 
 import { FcMenu, FcHome, FcAbout } from "react-icons/fc";
-import { BsSearch } from "react-icons/bs-search";
-import { Fikey } from "react-icons/fi";
+import { BsSearch } from "react-icons/bs";
+import { FiKey } from "react-icons/fi";
 
 const Navbar = () => (
   <Flex p="2" borderBottom="1px" borderColor="gray.100">
@@ -24,7 +24,7 @@ const Navbar = () => (
     <Spacer />
     <Box>
       <Menu>
-        <MenuButtom
+        <MenuButton
           as={IconButton}
           icon={<FcMenu />}
           variant="outlined"

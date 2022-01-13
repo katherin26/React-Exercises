@@ -6,6 +6,7 @@ import { BsFilter } from "react-icons/bs";
 import SearchFilters from "../components/SearchFilters";
 import Property from "../components/Property";
 import noresult from "../assets/images/noresult.png";
+import { fetchApi, baseUrl } from "../utils/fetchApi";
 
 //stateProperty = searchFilter, setSearchFilters
 //onClick={() => setSearchFilter((prevFilters) => !prevFilters)} = this means that if we are currently filtering something
@@ -35,6 +36,9 @@ import noresult from "../assets/images/noresult.png";
 //Static generation  : `getStaticProps() fetch data at build time.
 //Static generation : `getStaticPaths() Specify dynamic routers to pre-render pages based on data.
 //Server-Side-Rendering : `getServerSideProps() Fetch data on each request.
+
+//The Server-Side-Rendering = That's going to allow us to get the query and to actually dynamically change
+//the data once the user changes the filters.
 
 const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);

@@ -25,7 +25,8 @@ import noresult from "../assets/images/noresult.png";
 //we can simply render a new flex container like <Flex></Flex>
 
 //We are getting our properties throgh props.
-//We are populated the value through getStaticProps()
+//We are populated the value through getStaticProps()  and we are going to filter to query.
+//the default value is after the || for example "for rent".
 
 const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
@@ -75,5 +76,27 @@ const Search = ({ properties }) => {
     </Box>
   );
 };
+
+export async function getStaticProps({ query }) {
+  const purpose = query.purpose || "for-rent";
+  const rentFrequency = query.rentFrequency || "yearly";
+  const minPrice = query.minPrice || "0";
+  const maxPrice = query.maxPrice || "1000000";
+  const roomsMin = query.roomsMin || "0";
+  const bathsMin = query.bathsMin || "0";
+  const sort = query.sort || "price-desc";
+  const areaMax = query.areaMax || "35000";
+  const locationExternalIDs = query.locationExternalIDs || "5002";
+  const categoryExternalID = query.categoryExternalID || "4";
+
+  const data = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
+  );
+  return {
+    props: {
+      properties: data?history,
+    },
+  };
+}
 
 export default Search;

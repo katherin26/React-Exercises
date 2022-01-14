@@ -8,7 +8,9 @@ import { GoVerified } from "react-icons/go";
 import millify from "millify";
 
 import { baseUrl, fetchApi } from "../../utils/fetchApi";
-import ImageScrollbar from "../../components/ImagesScrollbar";
+import ImageScrollbar from "../../components/ImageScrollBar";
+
+//NOTE: If is verified && in that case we are gonna show the <GoVerified/> Icon.
 
 const PropertyDetails = ({
   propertyDetails: {

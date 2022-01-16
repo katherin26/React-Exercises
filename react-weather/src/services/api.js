@@ -5,8 +5,8 @@ export async function getWeather() {
     `https://weatherbit-v1-mashape.p.rapidapi.com/current`,
     {
       params: {
-        lat: "35.5",
-        lon: "-78.5",
+        lat: "40.746746",
+        lon: "-74.030246",
       },
       headers: {
         "x-rapidapi-host": "weatherbit-v1-mashape.p.rapidapi.com",

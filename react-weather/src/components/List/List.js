@@ -17,7 +17,7 @@ function ListComponent(props) {
           City : {props.data.city_name}.
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Sunset: {props.data.sunrise}
+          Sunrise: {props.data.sunrise}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Sunset: {props.data.sunset}

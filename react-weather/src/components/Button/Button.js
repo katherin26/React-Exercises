@@ -4,7 +4,9 @@ import Button from "@mui/material/Button";
 function ButtonComponent(props) {
   return (
     <>
-      <Button variant="contained">Get Weather</Button>
+      <Button variant="contained" onClick={props.fn}>
+        Get Weather
+      </Button>
     </>
   );
 }

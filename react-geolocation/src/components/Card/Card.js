@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import RunCircleIcon from "@mui/icons-material/RunCircle";
 
 export default function AppCard({ values }) {
+  console.log(values);
+  console.log(`values`);
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">
@@ -17,6 +19,9 @@ export default function AppCard({ values }) {
           <Typography variant="body2" sx={{ fontWeight: "bold" }}>
             {values.distance} Km - {values.duration} Min - {values.cadence}{" "}
             Cadence
+          </Typography>
+          <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            Air Quality : {values.airQuality.aqi}
           </Typography>
         </CardContent>
       </Card>

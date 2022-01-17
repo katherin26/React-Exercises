@@ -33,7 +33,7 @@ export default function Content() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const [workouts, setWorkouts] = useState([]);
-  const [list, setList] = useState(null);
+  const [list, setList] = useState(null); //Air quality.
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -62,10 +62,12 @@ export default function Content() {
         values.duration &&
         values.cadence
       ) {
+        const responseAirQuality = await getAirQuality(latitude, longitude);
         const response = await createWorkout({
           ...values,
           latitude,
           longitude,
+          airQuality: responseAirQuality.data[0],
         });
         await loadWorkouts();
       }
@@ -77,7 +79,6 @@ export default function Content() {
   const updateAirQuality = async () => {
     try {
       const response = await getAirQuality(latitude, longitude);
-      console.log(response);
     } catch (e) {
       console.error(e);
     }
@@ -102,8 +103,8 @@ export default function Content() {
               handleChange={handleChange}
               handleAddNewWorkout={handleAddNewWorkout}
             />
-            <ButtonComponent fn={() => listHandler()} />
-            {list && <ListComponent data={list} />}
+            {/* <ButtonComponent fn={() => listHandler()} />
+            {list && <ListComponent data={list} />} */}
           </Item>
           <Item>
             {workouts.map((workout, i) => (

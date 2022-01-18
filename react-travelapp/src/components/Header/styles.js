@@ -2,7 +2,7 @@
 //function inside that returns an object, you can add the classes in css and js type.
 // That means that if you want to have a class name title you would create a title property that's going
 //to be an object and then you can set the color to be equal to red.
-import { makeStyles } from "@material-ui/core/styles";
+import { alpha, makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   title: {
@@ -12,8 +12,8 @@ export default makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    //backgroundColor: alpha(theme.palette.common.white, 0.15),
-    //"&:hover": { backgroundColor: alpha(theme.palette.common.white, 0.25) },
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": { backgroundColor: alpha(theme.palette.common.white, 0.25) },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",

@@ -1,10 +1,10 @@
 {
-  "name": "CreateanApi",
+  "name": "amazon_scraper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev" : "nodemon index.js",
+    "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "keywords": [],
@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
+    "request": "^2.88.2",
     "request-promise": "^4.2.6"
   }
 }

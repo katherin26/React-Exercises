@@ -66,3 +66,19 @@ ntent('Start a command', (p) => {
 Note: we start with an intent 'Give me the news from' and we make it dynamic with this syntax.
 $(nameofthevariable\*) then an astetisk and then you can specify what can a user say to put that data
 inside the parenthesis , so that's going to be parentheses. (.\*)
+
+NOTE: &sources=${p.source.value.toLowerCase().split(" " }.join('-')
+
+Why are we doing that ??? because in the api is bbc-news and alan will understand BBC News, so to do that we need to lowercase then split the words and join it using a -.
+
+8. Using Alan you already have built-in functionalities of creating api calls, we also have axios built in but let's just use their **api.request** the first thing is gonna accept is NEWS_API_URL , and then
+   receive a callback function that receive three parameters.
+
+```
+error
+response
+body
+
+```
+
+and the in there we can get the actual data using the body parameter

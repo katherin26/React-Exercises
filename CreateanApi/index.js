@@ -28,11 +28,78 @@ const request = require("request-promise");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+const apiKey = "98569a293d4b56e3998c57206df09c9b";
+const baseUrl = `http://api.scraperapi.com?api_key=${apiKey}&autoparse=true`;
+
 app.use(express.json());
 
 //  Welcome route
+// We have our request and the response then we can return something we're going to have a function
+// block right inside of here, so what we want to send back once somebody visits this, specific url
+//on our api. So we can said res.send(`asbsdfds`);
 app.get("/", async (req, res) => {
-  res.send("Welcome to Amazon Scraper API!!");
+  res.send("Welcome to Amazon Scraper API!!.....");
 });
 
+//GET PRODUCT DETAILS
+//:productId = This means that the product is going to be dynamic, then we can add a callback function
+//and is going to be async and it's also going to have a request.
+
+app.get("/products/:productId", async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const response = await request(
+      `${baseUrl}&url=https://www.amazon.com/dp/${productId}`
+    );
+    res.json(JSON.parse(response));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+//GET PRODUCT REVIEWS.
+
+app.get("/products/:productId/reviews", async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const response = await request(
+      `${baseUrl}&url=https://www.amazon.com/product-reviews/${productId}`
+    );
+    res.json(JSON.parse(response));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+//GET PRODUCT OFFERS.
+
+app.get("/products/:productId/offers", async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const response = await request(
+      `${baseUrl}&url=https://www.amazon.com/gp/offer-listing/${productId}`
+    );
+    res.json(JSON.parse(response));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+//GET SEARCH RESULTS.
+
+app.get("/search/:searchQuery", async (req, res) => {
+  const { searchQuery } = req.params;
+
+  try {
+    const response = await request(
+      `${baseUrl}&url=https://www.amazon.com/gp/s?k=${productId}`
+    );
+    res.json(JSON.parse(response));
+  } catch (error) {
+    res.json(error);
+  }
+});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

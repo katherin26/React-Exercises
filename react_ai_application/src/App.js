@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import NewsCards from "./components/NewsCards/NewsCards";
+import useStyles from "./styles.js";
 
 //Now we can use out alanBtn once our application opens and , how are we going to do that ??? well of course
 //using  the useEffect .
@@ -19,6 +20,7 @@ const alanKey =
 
 const App = () => {
   const [newsArticles, setnewsArticles] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     alanBtn({
@@ -33,6 +35,13 @@ const App = () => {
   return (
     <div>
       <h1>Alan AI News Applation</h1>
+      <div className={classes.logoContainer}>
+        <img
+          src="https://alan.app/voice/images/previews/preview.png"
+          className={classes.alanLogo}
+          alt="alan logo"
+        ></img>
+      </div>
       <NewsCards articles={newsArticles} />
     </div>
   );

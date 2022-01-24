@@ -81,4 +81,38 @@ body
 
 ```
 
-and the in there we can get the actual data using the body parameter
+and the in there we can get the actual data using the body parameter.
+
+We have the articles we are going to do one simple if , if maybe articles were not fetched because
+someone gave us a wrong source so we are going to do is =
+
+```
+
+Example :
+
+if (no article.length) = if that's the case we're going to do p.play('Soryyy,, please try another source etcc..)
+```
+
+9. **Populate the articles**
+
+Create a global variable called : let saveArticles = [];
+
+and for populated we = savedArticles = articles;
+
+10. Once we have the articles we can do the same thing that we just did which is open curly braces and
+    then say **{command : "newHeadLines"}** , with the command we can pass also some data, in this case
+    the data we'll be passing is the **articles**.
+
+```
+p.play({command : "newHeadLines", articles})
+```
+
+Once we add the command , we can do another p.play().
+When we add the parenthesis with the latest and recent , sometimes alan is gonna read the latest
+and sometimes the recent. Just so he doesn't sound boring he's actually going to change words and sound
+more human and then on that we can open the ${} curlybraces and say ${p.source.value} news.
+
+```
+p.play(`Here are the (latest | recent) ${p.source.value} news.)
+
+```

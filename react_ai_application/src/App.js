@@ -11,6 +11,7 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 //Now we have the p.play({command: 'newHeadlines'}) whe used it inside the if statement.
 //Now we need to show or set the articles or news into the screen , for that we are going to use
 //use State, and the set the articles to the state.
+//Now we have the newsArticles and we can now send to the components that are going to display.
 
 const alanKey =
   "04f32d892ff5e002ad97f99e7f0774112e956eca572e1d8b807a3e2338fdd0dc/stage";

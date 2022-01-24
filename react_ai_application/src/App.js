@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
+import NewsCards from "./components/NewsCards/NewsCards";
 
 //Now we can use out alanBtn once our application opens and , how are we going to do that ??? well of course
 //using  the useEffect .
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <div>
       <h1>Alan AI News Applation</h1>
+      <NewsCards articles={newsArticles} />
     </div>
   );
 };

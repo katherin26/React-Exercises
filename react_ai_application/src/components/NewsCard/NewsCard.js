@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import useStyles from "./styles.js";
+
 //We are destructuring the article by using another pair of curly braces.
 //{(new Date(publishedAt))} = We want to create a date javascript object from the published ad thing
 //that we are getting. and then we add .toDateString() and this is going to give us the date.
@@ -17,10 +19,12 @@ const NewsCard = ({
   article: { description, publishedAt, source, title, url, urlToImage },
   i,
 }) => {
+  const classes = useStyles();
   return (
     <Card>
       <CardActionArea>
         <CardMedia
+          className={classes.media}
           image={
             urlToImage ||
             "https://www.kindpng.com/picc/m/390-3902798_news-newspaper-paper-newspaper-png-transparent-png.png"
@@ -28,7 +32,7 @@ const NewsCard = ({
         />
         <div>
           <Typography variant="body2" color="textSecondary" component="h2">
-            {new Date(publishedAt)}
+            {new Date(publishedAt).toDateString()}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="h2">
             {source.name}

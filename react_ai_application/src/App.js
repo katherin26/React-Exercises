@@ -34,13 +34,12 @@ const App = () => {
   }, []);
   return (
     <div>
-      <h1>Alan AI News Applation</h1>
       <div className={classes.logoContainer}>
         <img
-          src="https://alan.app/voice/images/previews/preview.png"
+          src="https://i0.wp.com/synqqblog.wpcomstaging.com/wp-content/uploads/2020/09/Futuristic-image-1-Copy.png?fit=3184%2C1878&ssl=1"
           className={classes.alanLogo}
-          alt="alan logo"
-        ></img>
+          alt="logo"
+        />
       </div>
       <NewsCards articles={newsArticles} />
     </div>

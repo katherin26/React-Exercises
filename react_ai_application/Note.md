@@ -116,3 +116,5 @@ more human and then on that we can open the ${} curlybraces and say ${p.source.v
 p.play(`Here are the (latest | recent) ${p.source.value} news.)
 
 ```
+
+//NOTE: THEN IN ALAN AI , We can add new intets for search for : latest news, latetst technology news, terms and sources.

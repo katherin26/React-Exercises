@@ -3,3 +3,4 @@
 1. **API:** **getstream.io**
 2. **DEPENDENCIES:** stream-chat stream-chat-react universal-cookies
 3. **Open an account on stream**
+4. **BETTER COMMENTS:** For write better coments in orange, blue , green and blue.

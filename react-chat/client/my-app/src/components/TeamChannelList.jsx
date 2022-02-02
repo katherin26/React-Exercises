@@ -6,6 +6,7 @@ import { AddChannel } from "../assets";
 //is equal to team then we want to return an error message . and if not team we simply want to return null.
 
 //NOTE: if loading, we are gonna return the same paragraph. but at the end we are goona add loading.
+//Inside we are gonna write , if type === 'team' we want to say channels or messages
 
 const TeamChannelList = ({ children, error = false, loading, type }) => {
   if (error) {
@@ -22,7 +23,7 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
     return (
       <div className="team-channel-list">
         <p className="team-channel-list__message loading">
-          Connection error, please wait a moment and try again.
+          {type === "team" ? "Channels" : "Messages"} loading ...
         </p>
       </div>
     );
@@ -30,7 +31,15 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
 
   return (
     <>
-      <div></div>
+      <div className="team-channel-list">
+        <div className="team-channel-list__header">
+          <p className="team-channel-list__header__title">
+            {type === "team" ? "Channels" : "Direct Messages"}
+          </p>
+          {/*Button - add channel */}
+        </div>
+        {children}
+      </div>
     </>
   );
 };

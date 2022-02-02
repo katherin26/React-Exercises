@@ -6,6 +6,8 @@ import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import HospitalIcon from "../assets/hospital.png";
 import LogoutIcon from "../assets/logout.png";
 
+/*Line 45: Stream allows you to get a channel list component right out of the box */
+
 const SideBar = () => (
   <>
     <div className="channel-list__sidebar">
@@ -39,6 +41,7 @@ const ChannelListContainer = () => {
       <div className="channel-list__list__wrapper">
         <CompanyHeader />
         <ChannelSearch />
+        <ChannelList List={(listProps) => <TeamChannelList {...listProps} />} />
       </div>
     </>
   );

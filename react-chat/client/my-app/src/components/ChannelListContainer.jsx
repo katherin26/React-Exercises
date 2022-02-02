@@ -8,6 +8,18 @@ import LogoutIcon from "../assets/logout.png";
 
 /*Line 45: Stream allows you to get a channel list component right out of the box */
 
+/*NOTE:  Our sidebar can have an instant return so just parentheses */
+/*NOTE: ChannelList is a self-closing component but accepts a few props.
+filters: is an object that's going to allow us to filter some messages.
+channelRenderFilterFn: This is a function that we can call and based  on that we can also pass on filters.
+List : That means that we want to render a custom list, we can do that by providing a callback , we get access
+to all the list props right inside of (listProps) and finally we can render the component we've created 
+which is called the team channel list.
+
+So stream allows you to get a channel list component right out of the box, but we want to create our own 
+team channel list. So that's why we add <TeamChannelList/>
+*/
+
 const SideBar = () => (
   <>
     <div className="channel-list__sidebar">
@@ -28,11 +40,15 @@ const SideBar = () => (
   </>
 );
 
+/*NOTE: CompanyHeader */
+
 const CompanyHeader = () => (
   <div className="channel-list__header">
     <p className="channel-list__header__text">Medical Pager</p>
   </div>
 );
+
+//NOTE:ChannelListContainer.
 
 const ChannelListContainer = () => {
   return (

@@ -18,4 +18,5 @@
    **nodemon**: is a package that reloads your application whenever you change the code so we need that
    for development
    **twilio**: for sending live sms messages
+   **cors**: cross origin requests
 3. Add the scripts :

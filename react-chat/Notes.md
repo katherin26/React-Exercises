@@ -20,3 +20,7 @@
    **twilio**: for sending live sms messages
    **cors**: cross origin requests
 3. Add the scripts :
+   **start**: "node index.js"
+   **dev**: "nodemon index.js"
+
+4. npm run dev

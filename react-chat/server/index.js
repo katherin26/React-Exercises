@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors"); //This is used for cross origin requests
 
+/*NOTE: Adding Routes for the signin and register, we can do that by requiring routes. */
+const authRoutes = require("./routes/auth.js");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 

@@ -7,17 +7,39 @@ import signinImage from "../assets/signup.jpg";
 /* {isSignup && () = THis is the shorthand method for the ternary operator, use the ternary if you have 
 two things that you want to show but you simply say is sign up and the and and if you only need to show
 one thing based on this condition. }
+
 NOTE: Line 100, In this paragraph we want to show a different message depending on if user is sign up or
 if not so we can say if is isSignUp in that case we can display a message something like this is signUp 
 and that's going to be already have an account ? but if it's not then we can say don't have an account?
 we need to be able to switch between the modes and then we are gonne have a span element instead of that
 p element and it's going to have the onClick property which is going to say switchMode 
 
+NOTE: Handle The data with handleChange = inside the setForm we put an object and we need to spread all of 
+the items from the form, so we spread all the other inputs because we're only changing one and we want to
+keep all the other ones but then how do we change a specific one well we're gonna get a e.target.name , that's
+the name of the input we're changing and then the value for that same input is under the e.target.value 
+and why we are using square brackets right there because is a syntax error so you have to wrap the name of
+this specific object key in the square brackets[e.target.name ] and then set that equal to : e.target.value that's going to 
+update our state field and 
 */
-const Auth = () => {
-  const [isSignup, setIsSignup] = useState(false);
 
-  const handleChange = () => {};
+const initialState = {
+  fullName: "",
+  userName: "",
+  password: "",
+  confirmPassword: "",
+  phoneNumber: "",
+  avatarURL: "",
+};
+
+const Auth = () => {
+  const [form, setForm] = useState(initialState);
+  const [isSignup, setIsSignup] = useState(true);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(form);
+  };
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -110,6 +132,9 @@ const Auth = () => {
             </p>
           </div>
         </div>
+      </div>
+      <div className="auth__form-container_image">
+        <img src={signinImage} alt="sign in" />
       </div>
     </div>
   );

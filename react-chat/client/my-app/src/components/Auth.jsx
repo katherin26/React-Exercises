@@ -38,6 +38,10 @@ const Auth = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); //Because is gonna reload the page.
     console.log(form);
   };
 
@@ -50,7 +54,7 @@ const Auth = () => {
       <div className="auth__form-container_fields">
         <div className="auth__form-container_fields-content">
           <p>{isSignup ? "Sign Up" : "Sign In"}</p>
-          <form onSubmit={() => {}}>
+          <form onSubmit={handleSubmit}>
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
                 <label htmlFor="fullName">Full Name</label>
@@ -122,6 +126,9 @@ const Auth = () => {
                 />
               </div>
             )}
+            <div className="auth__form-container_fields-content_button">
+              <button>{isSignup ? "Sign Up" : "Sign In"}</button>
+            </div>
           </form>
           <div className="auth__form-container_fields-account">
             <p>

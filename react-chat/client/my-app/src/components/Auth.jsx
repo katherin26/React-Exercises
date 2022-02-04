@@ -40,9 +40,15 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  //Send the data to the backend.
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); //Because is gonna reload the page.
-    console.log(form);
+    const { fullName, username, password, phoneNumber, avatarURL } = form;
+    const URL = "http://localhost:5000/auth";
+    const { data } = await axios.post(
+      `${URL}/${isSignup ? "signup" : "login"}`
+    );
   };
 
   const switchMode = () => {

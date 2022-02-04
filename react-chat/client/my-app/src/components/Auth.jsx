@@ -23,6 +23,9 @@ this specific object key in the square brackets[e.target.name ] and then set tha
 update our state field and 
 */
 
+//NOTE: CREATING COOKIES
+const cookies = new Cookies();
+
 const initialState = {
   fullName: "",
   userName: "",
@@ -40,15 +43,32 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  //Send the data to the backend.
+  //NOTE:Send the data to the backend.
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //Because is gonna reload the page.
     const { fullName, username, password, phoneNumber, avatarURL } = form;
     const URL = "http://localhost:5000/auth";
-    const { data } = await axios.post(
-      `${URL}/${isSignup ? "signup" : "login"}`
-    );
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+      username,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL,
+    });
+
+    cookies.set("token", token);
+    cookies.set("username", username);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if (isSignup) {
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+      cookies.set("hashedPassword", hashedPassword);
+    }
   };
 
   const switchMode = () => {

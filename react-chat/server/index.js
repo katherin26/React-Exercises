@@ -7,8 +7,6 @@ const authRoutes = require("./routes/auth.js");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-/*NOTE: This is going to allow us to call the enviroment variables right inside of our node application*/
-require("dotenv").config();
 
 /*NOTE: This is going to allow us to make cross=origin requests */
 app.use(cors());

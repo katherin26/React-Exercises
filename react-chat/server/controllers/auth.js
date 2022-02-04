@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const StreamChat = require("stream-chat").StreamChat;
 const crypto = require("crypto");
 
+/*NOTE: This is going to allow us to call the enviroment variables right inside of our node application*/
+require("dotenv").config();
+
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;
 const api_id = process.env.STREAM_API_ID;
@@ -16,7 +19,7 @@ const signup = async (req, res) => {
     const { fullName, username, password, phoneNumber } = req.body;
 
     const userId = crypto.randomBytes(16).toString("hex");
-    const serverClient = connect(api_key, api_secret, app_id);
+    const serverClient = connect(api_key, api_secret, api_id);
     //The 10 specifies the level of encryption.
     const hashedPassword = await bcrypt.hash(password, 10);
     const token = serverClient.createUserToken(userId);
@@ -35,8 +38,8 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const serverClient = connect(api_key, api_secret, app_id);
-    const client = StreamChat.getInstance(api_key, api_secret, app_id);
+    const serverClient = connect(api_key, api_secret, api_id);
+    const client = StreamChat.getInstance(api_key, api_secret, api_id);
     const { users } = await client.queryUsers({ name: username });
     //If there not users return an error message.
     if (!users.length)
@@ -45,7 +48,7 @@ const login = async (req, res) => {
     //and see if it matches the one that the user created the account with , so we can say const succes is
     //equal await bcrypt.compare()
     const success = await bcrypt.compare(password, users[0].hashedPassword);
-    const token = serverClient.createUserToken(user[0].id);
+    const token = serverClient.createUserToken(users[0].id);
     if (success) {
       res.status(200).json({
         token,

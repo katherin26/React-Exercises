@@ -20,7 +20,9 @@ So stream allows you to get a channel list component right out of the box, but w
 team channel list. So that's why we add <TeamChannelList/>
 */
 
-const SideBar = () => (
+const cookies = new Cookies();
+
+const SideBar = ({ logout }) => (
   <>
     <div className="channel-list__sidebar">
       <div className="channel-list__sidebar__icon1">
@@ -28,11 +30,8 @@ const SideBar = () => (
           <img src={HospitalIcon} alt="Hospital" width="30" />
         </div>
       </div>
-    </div>
-
-    <div className="channel-list__sidebar">
       <div className="channel-list__sidebar__icon2">
-        <div className="icon1__inner">
+        <div className="icon1__inner" onClick={logout}>
           <img src={LogoutIcon} alt="Logout" width="30" />
         </div>
       </div>
@@ -51,9 +50,22 @@ const CompanyHeader = () => (
 //NOTE:ChannelListContainer.
 
 const ChannelListContainer = () => {
+  //NOTE: We want to clear the cookies and also we want to reload the window.
+
+  const logout = () => {
+    cookies.remove("token");
+    cookies.remove("userId");
+    cookies.remove("username");
+    cookies.remove("fullname");
+    cookies.remove("avatarURL");
+    cookies.remove("hashedPassword");
+    cookies.remove("phoneNumber");
+
+    window.location.reload();
+  };
   return (
     <>
-      <SideBar />
+      <SideBar logout={logout} />
       <div className="channel-list__list__wrapper">
         <CompanyHeader />
         <ChannelSearch />

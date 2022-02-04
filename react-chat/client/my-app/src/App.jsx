@@ -5,10 +5,27 @@ import Cookies from "universal-cookie";
 import { ChannelContainer, ChannelListContainer, Auth } from "./components";
 import "./App.css";
 
+const cookies = new Cookies();
+
 //we get this api in getStream.io
 const apiKey = "n54zxeg3zknf";
+const authToken = cookies.get("token");
 
 const client = StreamChat.getInstance(apiKey);
+
+if (authToken) {
+  client.connectUser(
+    {
+      id: cookies.get("userId"),
+      name: cookies.get("username"),
+      fullName: cookies.get("fullname"),
+      image: cookies.get("avatarURL"),
+      hashedPassword: cookies.get("hashedPassword"),
+      phoneNumber: cookies.get("phoneNumber"),
+    },
+    authToken
+  );
+}
 
 /*NOTE: Auth: is gonna be a new component where our login and registration form are gonna to be in,
 so when do we want to render that auth well we're going to have a variable which is going to be something 
@@ -18,7 +35,6 @@ based on that variable we'll show or hide the form, so we can say if there is no
 we want to render or return the auth component. So we're gonna hide everything we've done so far if we're 
 still not logged in.
 */
-const authToken = false;
 
 const App = () => {
   if (!authToken) return <Auth />;

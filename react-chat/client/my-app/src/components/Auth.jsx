@@ -69,6 +69,8 @@ const Auth = () => {
       cookies.set("avatarURL", avatarURL);
       cookies.set("hashedPassword", hashedPassword);
     }
+    /*NOTE:  Now we set the cookies we want to reload our browser */
+    window.location.reload();
   };
 
   const switchMode = () => {

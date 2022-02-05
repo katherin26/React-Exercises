@@ -49,15 +49,15 @@ const CompanyHeader = () => (
 
 //NOTE:ChannelListContainer.
 
-const ChannelListContainer = () => {
+const ChannelListContainer = (
+  isCreating,
+  setIsCreating,
+  setCreateType,
+  setIsEditing
+) => {
   //NOTE: We want to clear the cookies and also we want to reload the window.
 
-  const logout = ({
-    isCreating,
-    setIsCreating,
-    setCreateType,
-    setIsEditing,
-  }) => {
+  const logout = () => {
     cookies.remove("token");
     cookies.remove("userId");
     cookies.remove("username");

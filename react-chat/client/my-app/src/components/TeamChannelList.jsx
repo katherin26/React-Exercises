@@ -8,7 +8,16 @@ import { AddChannel } from "../assets";
 //NOTE: if loading, we are gonna return the same paragraph. but at the end we are goona add loading.
 //Inside we are gonna write , if type === 'team' we want to say channels or messages
 
-const TeamChannelList = ({ children, error = false, loading, type }) => {
+const TeamChannelList = ({
+  children,
+  error = false,
+  loading,
+  type,
+  isCreating,
+  setIsCreating,
+  setCreateType,
+  setIsEditing,
+}) => {
   if (error) {
     return type === "team" ? (
       <div className="team-channel-list">
@@ -36,7 +45,13 @@ const TeamChannelList = ({ children, error = false, loading, type }) => {
           <p className="team-channel-list__header__title">
             {type === "team" ? "Channels" : "Direct Messages"}
           </p>
-          {/*Button - add channel */}
+          <AddChannel
+            isCreating={isCreating}
+            setIsCreating={setIsCreating}
+            setCreateType={setCreateType}
+            setIsEditing={setIsEditing}
+            type={type === "team" ? "team" : "messaging"}
+          />
         </div>
         {children}
       </div>

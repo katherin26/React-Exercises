@@ -27,23 +27,30 @@ const UsetItem = () => {
 
 //NOTE: UseEffect : We wanna call it once filters change, because sometimes we want the users for direct messages and
 //sometimes when filters change we want users only for channel messages.
+//What are we wanna do with client?? well down below we can say const response is = to await client.queryUsers().
+//This is going to allow us to query all the users based on specific parameters like
+/*
+{id: {$ne: client.userID}}
+
+basically, we are excluding the queering of users for the user with the current id, We don't want to find 
+ourselves there because we are the people aadding different users to the channel. 
+*/
 const UserList = () => {
+  const { client } = useChatContext();
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const { client } = useChatContext();
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
-
     const getUsers = async () => {
       if (loading) return;
 
       setLoading(true);
 
       try {
+        const response = await client.queryUsers({ id: { $ne: client.useID } });
       } catch (error) {}
     };
-  }, [filters]);
+  }, []);
 
   return (
     <>

@@ -35,14 +35,16 @@ const ChannelContainer = ({
   }
 
   const EmptyState = () => {
-    <div className="channel-empty__container">
-      <p className="channel-empty__first">
-        This is the beginning of your chat history.
-      </p>
-      <p className="channel-empty__second">
-        Send Messages, attachments, links, emojis, and more!!
-      </p>
-    </div>;
+    return (
+      <div className="channel-empty__container">
+        <p className="channel-empty__first">
+          This is the beginning of your chat history.
+        </p>
+        <p className="channel-empty__second">
+          Send Messages, attachments, links, emojis, and more!!
+        </p>
+      </div>
+    );
   };
 
   return (

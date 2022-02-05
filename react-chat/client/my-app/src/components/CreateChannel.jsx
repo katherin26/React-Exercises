@@ -15,7 +15,7 @@ const ChannelNameInput = ({ channelName = "", setChannelName }) => {
       <input
         value={channelName}
         onChange={handleChange}
-        placeholder="channel-name (no spaces)"
+        placeholder="channel-name"
       ></input>
       <p>Add Members</p>
     </div>
@@ -41,6 +41,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
           setChannelName={setChannelName}
         />
       )}
+      <UserList />
     </div>
   );
 };

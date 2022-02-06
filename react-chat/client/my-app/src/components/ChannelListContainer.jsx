@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
@@ -117,6 +117,50 @@ const ChannelListContent = ({
             <TeamChannelPreview {...previewProps} type="messaging" />
           )}
         />
+      </div>
+    </>
+  );
+};
+
+//NOTE: This channelListContainer give us the logic for the animation in mobile devices.
+//we need to toggle the container based on the width of the screen.
+
+const ChannelListContainer = ({
+  setCreateType,
+  setIsCreating,
+  setIsEditing,
+}) => {
+  const [toggleContainer, setToggleContainer] = useState(false);
+
+  return (
+    <>
+      <div className="channel-list__container">
+        <ChannelListContent
+          setIsCreating={setIsCreating}
+          setCreateType={setCreateType}
+          setIsEditing={setIsEditing}
+        />
+      </div>
+
+      <div
+        className="channel-list__container-responsive"
+        style={{
+          left: toggleContainer ? "0%" : "-89%",
+          backgroundColor: "#005fff",
+        }}
+      >
+        <div
+          className="channel-list__container-toggle"
+          onClick={() =>
+            setToggleContainer((prevToggleContainer) => !prevToggleContainer)
+          }
+        ></div>
+        <ChannelListContainer
+          setIsCreating={setIsCreating}
+          setCreateType={setCreateType}
+          setIsEditing={setIsEditing}
+          setToggleContainer={setToggleContainer}
+        ></ChannelListContainer>
       </div>
     </>
   );

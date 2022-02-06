@@ -47,9 +47,18 @@ const CompanyHeader = () => (
   </div>
 );
 
+//We want to keep only the ones where the channel.type is === team
+const customChannelTeamFilter = (channels) => {
+  return channels.filter((channel) => channel.type === "team");
+};
+
+const customChannelMessagingFilter = (channels) => {
+  return channels.filter((channel) => channel.type === "messaging");
+};
+
 //NOTE:ChannelListContainer.
 
-const ChannelListContainer = ({
+const ChannelListContent = ({
   isCreating,
   setIsCreating,
   setCreateType,
@@ -75,6 +84,8 @@ const ChannelListContainer = ({
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
+          filters={{}}
+          channelRenderFilterFn={customChannelTeamFilter}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
@@ -90,6 +101,8 @@ const ChannelListContainer = ({
           )}
         />
         <ChannelList
+          filters={{}}
+          channelRenderFilterFn={customChannelMessagingFilter}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
@@ -109,4 +122,4 @@ const ChannelListContainer = ({
   );
 };
 
-export default ChannelListContainer;
+export default ChannelListContent;

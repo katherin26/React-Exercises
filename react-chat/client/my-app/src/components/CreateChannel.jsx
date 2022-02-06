@@ -16,13 +16,15 @@ const ChannelNameInput = ({ channelName = "", setChannelName }) => {
         value={channelName}
         onChange={handleChange}
         placeholder="channel-name"
-      ></input>
+      />
       <p>Add Members</p>
     </div>
   );
 };
 
 const CreateChannel = ({ createType, setIsCreating }) => {
+  const { client, setActiveChannel } = useChatContext();
+  const [selectedUsers, setSelectedUsers] = useState([client.userID || ""]);
   const [channelName, setChannelName] = useState("");
 
   return (
@@ -41,6 +43,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
           setChannelName={setChannelName}
         />
       )}
+      <UserList setSelectedUsers={setSelectedUsers} />
       <UserList />
     </div>
   );

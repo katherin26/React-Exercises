@@ -27,6 +27,28 @@ const CreateChannel = ({ createType, setIsCreating }) => {
   const [selectedUsers, setSelectedUsers] = useState([client.userID || ""]);
   const [channelName, setChannelName] = useState("");
 
+  const createChannel = async (e) => {
+    e.preventDefault();
+    //NOTE: create a channel
+    try {
+      const newChannel = await client.channel(createType, channelName, {
+        name: channelName,
+        members: selectedUsers,
+      });
+
+      //NOTE: We want to keep watching that channel and see whenever there's a new message in that channel.
+      await newChannel.watch();
+
+      //reset the imput field.
+      setChannelName("");
+      setIsCreating(false);
+      setSelectedUsers([client.userID]);
+      setActiveChannel(newChannel);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="create-channel__container">
       <div className="create-channel__header">
@@ -44,7 +66,11 @@ const CreateChannel = ({ createType, setIsCreating }) => {
         />
       )}
       <UserList setSelectedUsers={setSelectedUsers} />
-      <UserList />
+      <div className="create-channel__button-wrapper" onClick={createChannel}>
+        <p>
+          {createType === "team" ? "Create Channel" : "Create Message Group"}
+        </p>
+      </div>
     </div>
   );
 };

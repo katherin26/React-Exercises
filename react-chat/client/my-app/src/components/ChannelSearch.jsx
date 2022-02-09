@@ -39,8 +39,8 @@ const ChannelSearch = ({ setToggleContainer }) => {
         channelResponse,
         userResponse,
       ]);
-      setTeamChannels(channels);
-      setDirectChannels(users);
+      if (channels.length) setTeamChannels(channels);
+      if (users.length) setDirectChannels(users);
     } catch (error) {
       setQuery("");
     }

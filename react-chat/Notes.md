@@ -1,6 +1,6 @@
 # **MEDICAL CHAT PROJECT**
 
-1. **API:** **getstream.io**
+1. **API:** **getstream.io**,
 2. **DEPENDENCIES:** stream-chat stream-chat-react universal-cookies
 3. **Open an account on stream**
 4. **BETTER COMMENTS:** For write better coments in orange, blue , green and blue.
@@ -24,3 +24,11 @@
    **dev**: "nodemon index.js"
 
 4. npm run dev
+
+**Twilio API**:
+
+1. Get a trial phone number.
+2. Messaging
+3. Try it out
+4. Get Set Up
+5. Messaging Service Name

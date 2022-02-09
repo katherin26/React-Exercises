@@ -8,7 +8,7 @@ that, because the usual browser behavior is whenever you click submit or somethi
 the page, we're working with react , we want everything to be reactive instantaneous and we want to
 prevent that.*/
 
-const ChannelSearch = () => {
+const ChannelSearch = ({ setToggleContainer }) => {
   const { client, setActiveChannel } = useChatContext();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,6 +44,11 @@ const ChannelSearch = () => {
     getChannels(event.target.value);
   };
 
+  const setChannel = (channel) => {
+    setQuery("");
+    setActiveChannel(channel);
+  };
+
   return (
     <>
       <div className="channel-search__container">
@@ -59,6 +64,16 @@ const ChannelSearch = () => {
             onChange={onSearch}
           />
         </div>
+        {query && (
+          <ResultDropdown
+            teamChannels={teamChannels}
+            directChannels={directChannels}
+            loading={loading}
+            setChannel={setChannel}
+            setQuery={setQuery}
+            setToggleContainer={setToggleContainer}
+          />
+        )}
       </div>
     </>
   );

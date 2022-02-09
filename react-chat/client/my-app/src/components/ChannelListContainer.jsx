@@ -63,7 +63,10 @@ const ChannelListContent = ({
   setIsCreating,
   setCreateType,
   setIsEditing,
+  setToggleContainer,
 }) => {
+  const { client } = useChatContext();
+
   //NOTE: We want to clear the cookies and also we want to reload the window.
 
   const logout = () => {
@@ -77,6 +80,8 @@ const ChannelListContent = ({
 
     window.location.reload();
   };
+
+  const filters = { members: { $in: [client.userID] } };
   return (
     <>
       <SideBar logout={logout} />
@@ -84,7 +89,7 @@ const ChannelListContent = ({
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
-          filters={{}}
+          filters={filters}
           channelRenderFilterFn={customChannelTeamFilter}
           List={(listProps) => (
             <TeamChannelList
@@ -94,14 +99,21 @@ const ChannelListContent = ({
               setIsCreating={setIsCreating}
               setCreateType={setCreateType}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer}
             />
           )}
           Preview={(previewProps) => (
-            <TeamChannelPreview {...previewProps} type="team" />
+            <TeamChannelPreview
+              {...previewProps}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer}
+              type="team"
+            />
           )}
         />
         <ChannelList
-          filters={{}}
+          filters={filters}
           channelRenderFilterFn={customChannelMessagingFilter}
           List={(listProps) => (
             <TeamChannelList
@@ -111,10 +123,17 @@ const ChannelListContent = ({
               setIsCreating={setIsCreating}
               setCreateType={setCreateType}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer}
             />
           )}
           Preview={(previewProps) => (
-            <TeamChannelPreview {...previewProps} type="messaging" />
+            <TeamChannelPreview
+              {...previewProps}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer}
+              type="messaging"
+            />
           )}
         />
       </div>

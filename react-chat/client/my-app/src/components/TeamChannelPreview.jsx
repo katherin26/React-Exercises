@@ -3,7 +3,14 @@ import { Avatar, useChatContext } from "stream-chat-react";
 
 //NOTE: The props we need is channel and type
 
-const TeamChannelPreview = ({ channel, type }) => {
+const TeamChannelPreview = ({
+  setActiveChannel,
+  setIsCreating,
+  setIsEditing,
+  setToggleContainer,
+  channel,
+  type,
+}) => {
   const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => (
@@ -33,15 +40,16 @@ Then we want to check if the user.id is not equal to client.userID
     const members = Object.values(channel.state.members).filter(
       ({ user }) => user.id !== client.userID
     );
+    console.log(members);
 
     return (
       <div className="channel-preview__item single">
         <Avatar
           image={members[0]?.user?.image}
-          name={members[0]?.user?.fullName}
+          name={members[0]?.user?.fullName || members[0]?.user?.id}
           size={24}
         />
-        <p>{members[0]?.user?.fullName}</p>
+        <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
       </div>
     );
   };
@@ -55,7 +63,13 @@ Then we want to check if the user.id is not equal to client.userID
             : "channel-preview__wrapper"
         }
         onClick={() => {
-          console.log(channel);
+          setIsCreating(false);
+          setIsEditing(false);
+          setActiveChannel(channel);
+
+          if (setToggleContainer) {
+            setToggleContainer((prevState) => !prevState);
+          }
         }}
       >
         {type === "team" ? <ChannelPreview /> : <DirectPreview />}

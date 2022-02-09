@@ -55,11 +55,18 @@ const TeamChannelHeader = ({ setIsEditing }) => {
   const { channel, watcher_count } = useChannelStateContext();
   const { client } = useChatContext();
 
+  console.log(`channel inner`);
+  console.log(channel.state);
   const MessagingHeader = () => {
     const members = Object.values(channel.state.members).filter(
       ({ user }) => user.id !== client.userID
     );
     const additionalMembers = members.length - 3;
+
+    console.log(`members`);
+    console.log(members.map(({ user }) => user.id));
+    console.log("end members");
+    console.log(channel.type);
 
     if (channel.type === "messaging") {
       return (

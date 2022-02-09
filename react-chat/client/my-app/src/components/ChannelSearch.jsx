@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useChatContext } from "stream-chat-react";
 
 import { SearchIcon } from "../assets";
+import { ResultsDropdown } from "../components";
 
 /*NOTE: Event.preventDefault = we have to do this every time that you have an input or buttons or things like
 that, because the usual browser behavior is whenever you click submit or something similar to reload
@@ -14,6 +15,13 @@ const ChannelSearch = ({ setToggleContainer }) => {
   const [loading, setLoading] = useState(false);
   const [teamChannels, setTeamChannels] = useState([]);
   const [directChannels, setDirectChannels] = useState([]);
+
+  useEffect(() => {
+    if (!query) {
+      setTeamChannels([]);
+      setDirectChannels([]);
+    }
+  }, [query]);
 
   const getChannels = async (text) => {
     try {
@@ -31,17 +39,20 @@ const ChannelSearch = ({ setToggleContainer }) => {
         channelResponse,
         userResponse,
       ]);
+      setTeamChannels(channels);
+      setDirectChannels(users);
     } catch (error) {
       setQuery("");
     }
   };
 
-  const onSearch = (event) => {
+  const onSearch = async (event) => {
     event.preventDefault();
 
     setLoading(true);
     setQuery(event.target.value);
-    getChannels(event.target.value);
+    await getChannels(event.target.value);
+    setLoading(false);
   };
 
   const setChannel = (channel) => {
@@ -65,7 +76,7 @@ const ChannelSearch = ({ setToggleContainer }) => {
           />
         </div>
         {query && (
-          <ResultDropdown
+          <ResultsDropdown
             teamChannels={teamChannels}
             directChannels={directChannels}
             loading={loading}

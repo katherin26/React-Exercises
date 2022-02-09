@@ -9,12 +9,28 @@ the page, we're working with react , we want everything to be reactive instantan
 prevent that.*/
 
 const ChannelSearch = () => {
+  const { client, setActiveChannel } = useChatContext();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [teamChannels, setTeamChannels] = useState([]);
+  const [directChannels, setDirectChannels] = useState([]);
 
   const getChannels = async (text) => {
     try {
-      //TODO: fetch channels
+      const channelResponse = client.queryChannels({
+        type: "team",
+        name: { $autocomplete: text },
+        members: { $in: [client.userID] },
+      });
+      const userResponse = client.queryUsers({
+        id: { $ne: client.userID },
+        name: { $autocomplete: text },
+      });
+
+      const [channels, { users }] = await Promise.all([
+        channelResponse,
+        userResponse,
+      ]);
     } catch (error) {
       setQuery("");
     }

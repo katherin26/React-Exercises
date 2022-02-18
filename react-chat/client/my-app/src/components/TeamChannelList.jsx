@@ -23,7 +23,7 @@ const TeamChannelList = ({
     return type === "team" ? (
       <div className="team-channel-list">
         <p className="team-channel-list__message">
-          Connection error, please wait a moment and try again.
+          Error de conexion, por favor espera un momento y inteta nuevamente.
         </p>
       </div>
     ) : null;

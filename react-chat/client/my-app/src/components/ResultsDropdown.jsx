@@ -100,7 +100,7 @@ const ResultsDropdown = ({
       )}
       {!loading && !teamChannels.length ? (
         <p className="channel-search__results-header">
-          <i>No channels found</i>
+          <i>No se encontro el canal</i>
         </p>
       ) : (
         teamChannels?.map((channel, i) => (
@@ -122,7 +122,7 @@ const ResultsDropdown = ({
       )}
       {!loading && !directChannels.length ? (
         <p className="channel-search__res ults-header">
-          <i>No direct messages found</i>
+          <i>No mensajes directos encontrados</i>
         </p>
       ) : (
         directChannels?.map((channel, i) => (

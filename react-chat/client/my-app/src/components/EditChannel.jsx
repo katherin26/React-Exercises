@@ -19,7 +19,7 @@ const ChannelNameInput = ({ channelName = "", setChannelName }) => {
         onChange={handleChange}
         placeholder="channel-name"
       />
-      <p>Add Members</p>
+      <p>Agrega Miembros</p>
     </div>
   );
 };
@@ -37,7 +37,7 @@ const EditChannel = ({ setIsEditing }) => {
     if (nameChanged) {
       await channel.update(
         { name: channelName },
-        { text: `Channel name changed to ${channelName}` }
+        { text: `El Nombre del canal se cambio a : ${channelName}` }
       );
     }
 
@@ -56,7 +56,7 @@ const EditChannel = ({ setIsEditing }) => {
   return (
     <div className="edit-channel__container">
       <div className="edit-channel__header">
-        <p>Edit Channel</p>
+        <p>Editar el nombre del canal y agregar usuarios</p>
         <CloseCreateChannel setIsEditing={setIsEditing} />
       </div>
       <ChannelNameInput
@@ -65,7 +65,7 @@ const EditChannel = ({ setIsEditing }) => {
       />
       <UserList setSelectedUsers={setSelectedUsers} />
       <div className="edit-channel__button-wrapper" onClick={updateChannel}>
-        <p>Save Changes</p>
+        <p>Guardar Cambios</p>
       </div>
     </div>
   );

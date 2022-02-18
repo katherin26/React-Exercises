@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-
-import signinImage from "../assets/signup.jpg";
+import ChatImg from "../assets/chatCover.jpg";
+import Chatwallpaper from "../assets/chatwallpaper3.png";
 
 /* {isSignup && () = THis is the shorthand method for the ternary operator, use the ternary if you have 
 two things that you want to show but you simply say is sign up and the and and if you only need to show
@@ -48,7 +48,7 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); //Because is gonna reload the page.
     const { username, password, phoneNumber, avatarURL } = form;
-    const URL = "http://localhost:5000/auth";
+    const URL = "https://ailtbwowmd.execute-api.us-east-1.amazonaws.com/auth";
     const {
       data: { token, userId, hashedPassword, fullName },
     } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
@@ -81,11 +81,11 @@ const Auth = () => {
     <div className="auth__form-container">
       <div className="auth__form-container_fields">
         <div className="auth__form-container_fields-content">
-          <p>{isSignup ? "Sign Up" : "Sign In"}</p>
+          <p>{isSignup ? "Registrarse" : "Entrar a la cuenta"}</p>
           <form onSubmit={handleSubmit}>
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
-                <label htmlFor="fullName">Full Name</label>
+                <label htmlFor="fullName">Nombre</label>
                 <input
                   name="fullName"
                   type="text"
@@ -97,7 +97,7 @@ const Auth = () => {
             )}
 
             <div className="auth__form-container_fields-content_input">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Nombre de usuario</label>
               <input
                 name="username"
                 type="text"
@@ -109,7 +109,7 @@ const Auth = () => {
 
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
-                <label htmlFor="fullName">Phone Number</label>
+                <label htmlFor="fullName">Telefono</label>
                 <input
                   name="phoneNumber"
                   type="text"
@@ -122,7 +122,7 @@ const Auth = () => {
 
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
-                <label htmlFor="avatarURL">Avatar URL</label>
+                <label htmlFor="avatarURL">Avatar (Direccion de URL)</label>
                 <input
                   name="avatarURL"
                   type="text"
@@ -133,7 +133,7 @@ const Auth = () => {
               </div>
             )}
             <div className="auth__form-container_fields-content_input">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Contraseña</label>
               <input
                 name="password"
                 type="password"
@@ -144,7 +144,7 @@ const Auth = () => {
             </div>
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">Confirmar Contraseña</label>
                 <input
                   name="confirmPassword"
                   type="password"
@@ -155,21 +155,21 @@ const Auth = () => {
               </div>
             )}
             <div className="auth__form-container_fields-content_button">
-              <button>{isSignup ? "Sign Up" : "Sign In"}</button>
+              <button>{isSignup ? "Registrarse" : "Entrar a la cuenta"}</button>
             </div>
           </form>
           <div className="auth__form-container_fields-account">
             <p>
-              {isSignup ? "Already have an account?" : "Don't have an account?"}
+              {isSignup ? "Ya tienes una cuenta? " : "No tienes cuenta? "}
               <span onClick={switchMode}>
-                {isSignup ? "Sign In" : "Sign Up"}
+                {isSignup ? "Entrar a la cuenta" : "Registrarse"}
               </span>
             </p>
           </div>
         </div>
       </div>
       <div className="auth__form-container_image">
-        <img src={signinImage} alt="sign in" />
+        <img src={Chatwallpaper} alt="sign in" />
       </div>
     </div>
   );

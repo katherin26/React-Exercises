@@ -96,7 +96,7 @@ const UserList = ({ setSelectedUsers }) => {
     return (
       <ListContainer>
         <div className="user-list__message">
-          Error loading, please refresh and try again.
+          Error cargando, por favor carga la pagina y intentalo nuevamente.
         </div>
       </ListContainer>
     );
@@ -105,7 +105,7 @@ const UserList = ({ setSelectedUsers }) => {
   if (listEmpty) {
     return (
       <ListContainer>
-        <div className="user-list__message">No users found.</div>
+        <div className="user-list__message">No se encontraron usuarios.</div>
       </ListContainer>
     );
   }
@@ -113,7 +113,7 @@ const UserList = ({ setSelectedUsers }) => {
   return (
     <ListContainer>
       {loading ? (
-        <div className="user-list__message">Loading users...</div>
+        <div className="user-list__message">Cargando usuarios...</div>
       ) : (
         users?.map((user, i) => (
           <UserItem

@@ -30,6 +30,8 @@ const App = () => {
     alanBtn({
       key: alanKey,
       onCommand: ({ command, articles, number }) => {
+        console.log(`soy number`);
+        console.log(number);
         if (command === "newHeadlines") {
           setnewsArticles(articles);
           setActiveArticle(-1);

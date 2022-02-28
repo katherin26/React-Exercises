@@ -6,6 +6,7 @@
    **moment**: Is a library for working with time and date.
    **react-file-base64**: This is gonna to convert our images.
    **redux** and **redux-thunk**: redux thunk is used for asynchronous actions using redux.
+   **@material-ui/core**
 
 # **SERVER SIDE**
 

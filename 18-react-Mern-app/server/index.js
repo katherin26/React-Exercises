@@ -9,11 +9,11 @@ import postRoutes from "./routes/posts.js";
 const app = express();
 dotenv.config();
 
-app.use("/posts", postRoutes);
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+app.use("/posts", postRoutes);
 
 /*Connect our server application with a real database for that we are going to use mongodb more specifically their
 cloud atlas version of mongobd which means they are going to host our database on their cloud .*/

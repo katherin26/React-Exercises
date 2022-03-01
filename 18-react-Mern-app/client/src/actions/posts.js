@@ -12,7 +12,19 @@ function in front of it and then instead of returning the action we have to disp
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
-    dispatch({ type: "FETCH_ALL", payload: [] });
+    dispatch({ type: "FETCH_ALL", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+//we need to dispatch this action , so we go into the Form.js and import that use dispatch from react-redux.
+
+export const createPost = (post) => async (dispatch) => {
+  try {
+    const { data } = await api.createPost(post);
+
+    dispatch({ type: "CREATE", payload: data });
   } catch (error) {
     console.log(error.message);
   }

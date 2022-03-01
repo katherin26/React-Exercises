@@ -29,3 +29,8 @@
    studio.
    Create a new variable which is going to be called CONNECTION_URL: then copy and paste the string.
 5. npm i dotenv
+
+# **TIPS FOR TRAINING**
+
+1. mem.dev
+2. svg Backgrounds

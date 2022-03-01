@@ -14,6 +14,7 @@ import thunk from "redux-thunk";
 import reducers from "./reducers";
 
 import App from "./App";
+import "./index.css";
 
 /*To set redux we need to create a variable called store = that's going to be equal to create store.
 Create store takes in two different things first: we have the reducers which we didn't define yet as 

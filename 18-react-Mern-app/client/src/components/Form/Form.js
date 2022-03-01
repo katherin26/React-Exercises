@@ -15,12 +15,15 @@ function Form() {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     dispatch(createPost(postData));
   };
+
   const clear = () => {};
+
   return (
     <Paper className={classes.paper}>
       <form

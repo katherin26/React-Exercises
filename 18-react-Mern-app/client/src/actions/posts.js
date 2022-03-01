@@ -18,7 +18,8 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
-//we need to dispatch this action , so we go into the Form.js and import that use dispatch from react-redux.
+//we need to dispatch this action , so we go into the Form.js and import that use dispatch from
+//react-redux.
 
 export const createPost = (post) => async (dispatch) => {
   try {

@@ -1,5 +1,5 @@
 import express from "express";
-import { getPosts, createPost } from "../controllers/posts.js";
+import { getPosts, createPost, updatePost } from "../controllers/posts.js";
 
 const router = express.Router();
 
@@ -14,8 +14,10 @@ const router = express.Router();
 //to all routes in here.
 
 //http://localhost:5000/posts
+//Patch is for updating existing documents, for editing we need to know the id.
 
 router.get("/", getPosts);
 router.post("/", createPost);
+router.patch("/:id", updatePost);
 
 export default router;

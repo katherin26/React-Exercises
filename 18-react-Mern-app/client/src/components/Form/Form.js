@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import useStyles from "../Form/style";
-import { createPost } from "../../actions/posts";
+import { useDispatch, useSelector } from "react-redux";
 
-function Form() {
+import useStyles from "../Form/style";
+import { createPost, updatePost } from "../../actions/posts";
+
+//GET THE CURRENT ID
+//if we have a current id then we want to loop over the state.posts
+//and we want to find a post who has the same id of our current id.
+
+function Form({ currentId, setCurrentId }) {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -13,13 +18,24 @@ function Form() {
     tags: "",
     selectedFile: "",
   });
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]); //when the post changes we want to run this!
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(createPost(postData));
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
   };
 
   const clear = () => {};

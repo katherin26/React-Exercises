@@ -5,7 +5,7 @@ if we get an error right there and the code in the try is going to happen if eve
 So in the try we need to retrieve all the posts that we currently have in the database.
 */
 
-import { Mongoose } from "mongoose";
+import Mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
 export const getPosts = async (req, res) => {

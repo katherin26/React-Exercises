@@ -16,8 +16,9 @@ import useStyles from "../Post/style";
 
 /*The body2 is going to be about when the post was created, we can use that moment library installed 
 at the beginning that's gonna be import moment from moment */
-function Post({ post }) {
+function Post({ post, setCurrentId }) {
   const classes = useStyles();
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -32,7 +33,11 @@ function Post({ post }) {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </div>

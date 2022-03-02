@@ -69,7 +69,7 @@ function Post({ post, setCurrentId }) {
           onClick={() => dispatch(likePost(post._id))}
         >
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          &nbsp; Like &nbsp;
           {post.likeCount}
         </Button>
         <Button
@@ -78,7 +78,7 @@ function Post({ post, setCurrentId }) {
           onClick={() => dispatch(deletePost(post._id))}
         >
           <DeleteIcon fontSize="small" />
-          Delete
+          &nbsp; Delete
         </Button>
       </CardActions>
     </Card>

@@ -17,29 +17,23 @@ function Navbar() {
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          className={classes.heading}
-          variant="h2"
-          align="center"
-        >
-          Memories
+        <Typography className={classes.heading} variant="h2" align="center">
+          <Link to="/">Memories</Link>
         </Typography>
         <img className={classes.image} src={memories} alt="icon" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
-        {user ? (
+        {user?.result ? (
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
-              alt={user.result.name}
-              src={user.result.imageUrl}
+              alt={user?.result.name}
+              src={user?.result.imageUrl}
             >
-              {user.result.name.charAt(0)}
+              {user?.result.name.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
-              {user.result.name}
+              {user?.result.name}
             </Typography>
             <Button
               variant="contained"
@@ -50,13 +44,8 @@ function Navbar() {
             </Button>
           </div>
         ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            Sign In
+          <Button variant="contained" color="primary">
+            <Link to="/auth">Sing In</Link>
           </Button>
         )}
       </Toolbar>

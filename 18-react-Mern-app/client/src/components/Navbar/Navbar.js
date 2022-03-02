@@ -1,8 +1,10 @@
 import React from "react";
+import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button, Avatar } from "@material-ui/core";
+
 import memories from "../../images/memories.png";
-import useStyles from "./styles.js";
+
+import useStyles from "./styles";
 
 /*NOTE: Component={Link} to="/" this point to our main route.
 2. if user exits then we are going to show his information and if not we show nothing.

@@ -34,3 +34,15 @@
 
 1. mem.dev
 2. svg Backgrounds
+
+# **AUTH PART 3**
+
+1. **FRONT END PART**
+
+1. npm install jwt-decode react-google-login
+
+1. **BACK END PART**
+1. npm install bcryptjs jsonwebtoken
+
+Create a new folder with a new file called Navbar and styles.js.
+Add the Appbar component.

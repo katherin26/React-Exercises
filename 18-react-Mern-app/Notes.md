@@ -8,6 +8,7 @@
    **redux** and **redux-thunk**: redux thunk is used for asynchronous actions using redux.
    **react-redux**
    **@material-ui/core**
+   **react-router-dom**
 
 # **SERVER SIDE**
 

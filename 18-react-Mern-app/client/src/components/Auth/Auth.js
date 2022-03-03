@@ -14,8 +14,7 @@ import Input from "./Input";
 function Auth() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-
-  const isSignup = false;
+  const [isSignup, setSignUp] = useState(false);
 
   //If the previous show password is something we want to say false and then previous show password.
   //That means that we're toggling it ,
@@ -25,6 +24,10 @@ function Auth() {
   };
   const handleSubmit = () => {};
   const handleChange = () => {};
+  const switchMode = () => {
+    setSignUp((prevIsSignup) => !prevIsSignup);
+    handleShowPassword(false);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -75,6 +78,13 @@ function Auth() {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
+          <Grid item>
+            <Button onClick={switchMode}>
+              {isSignup
+                ? "Already have an account? Sign In"
+                : "Don't have an account? Sign Up "}
+            </Button>
+          </Grid>
         </form>
       </Paper>
     </Container>

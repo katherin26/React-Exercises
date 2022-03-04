@@ -7,6 +7,10 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
+import { GoogleLogin } from "react-google-login";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Icon from "../Auth/icon";
 
 import useStyles from "../Auth/styles";
 import Input from "./Input";
@@ -15,6 +19,8 @@ function Auth() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setSignUp] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); //THis redirects to the home page once you are login
 
   //If the previous show password is something we want to say false and then previous show password.
   //That means that we're toggling it ,
@@ -27,6 +33,27 @@ function Auth() {
   const switchMode = () => {
     setSignUp((prevIsSignup) => !prevIsSignup);
     handleShowPassword(false);
+  };
+
+  //Now we can use the optional chaining operator ?. we are gonna make sure that we don't have
+  //an error if we don't have access to the real object.
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //If you have an error with the sign in , console.log(error) the error and sometimes it could be the cookies and cache,
+  //So you need to go to settings advanced ===> clear browsing data and cached images.
+  const googleFailure = (error) => {
+    console.log("Google Sign In was unsuccessful. Try Again Later.");
+    console.log(error);
   };
 
   return (
@@ -69,6 +96,7 @@ function Auth() {
               />
             )}
           </Grid>
+
           <Button
             type="submit"
             fullWidth
@@ -78,6 +106,25 @@ function Auth() {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
+          <GoogleLogin
+            clientId="849374713869-v9693q3mnvblampbjhvrgsf2f2vtsf7c.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+                className={classes.googleButton}
+                color="primary"
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<Icon />}
+                variant="contained"
+              >
+                Google Sign In
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
           <Grid item>
             <Button onClick={switchMode}>
               {isSignup

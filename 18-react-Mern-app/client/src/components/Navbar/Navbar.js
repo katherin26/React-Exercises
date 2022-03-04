@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import memories from "../../images/memories.png";
 
 import useStyles from "./styles";
 
 /*NOTE: Component={Link} to="/" this point to our main route.
 2. if user exits then we are going to show his information and if not we show nothing.
+
+Another change in react router v5 is the useHistory === to useNavigate. and we use this hook
+when in log out return to the root page.
 */
 
 function Navbar() {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  console.log(user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = user?.token;
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+    setUser(null);
+  };
+
+  // useEffect(() => {
+  //   const token = user?.token;
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, []);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -45,7 +55,7 @@ function Navbar() {
               variant="contained"
               className={classes.logout}
               color="secondary"
-              onClick={}
+              onClick={logout}
             >
               Logout
             </Button>

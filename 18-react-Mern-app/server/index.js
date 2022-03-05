@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/users.js";
 
 const app = express();
 
@@ -15,6 +16,9 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/posts", postRoutes);
+
+//We need to add the routes for the users.
+app.use("/user", userRoutes);
 
 /*Connect our server application with a real database for that we are going to use mongodb more specifically their
 cloud atlas version of mongobd which means they are going to host our database on their cloud .*/

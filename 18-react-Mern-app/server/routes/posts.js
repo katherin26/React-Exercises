@@ -6,6 +6,7 @@ import {
   deletePost,
   likePost,
 } from "../controllers/posts.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -22,10 +23,14 @@ const router = express.Router();
 //http://localhost:5000/posts
 //Patch is for updating existing documents, for editing we need to know the id.
 
+/*MIDDLEWARE = We wanna added it before specific actions. for example all of the users no matter
+ if they're logged in or not they can see all the posts but to create a post you need to have 
+ your own id, you need to be logged in. */
+
 router.get("/", getPosts);
-router.post("/", createPost);
-router.patch("/:id", updatePost);
-router.delete("/:id", deletePost);
-router.patch("/:id/likePost", likePost);
+router.post("/", auth, createPost);
+router.patch("/:id", auth, updatePost); //this is going to be managed in the frontend.
+router.delete("/:id", auth, deletePost); //this is going to be managed in the frontend.
+router.patch("/:id/likePost", auth, likePost);
 
 export default router;

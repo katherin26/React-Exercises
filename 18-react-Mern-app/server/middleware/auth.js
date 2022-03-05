@@ -57,6 +57,6 @@ If a user Wants to like a post = he has to do this =
     click the like button => auth middleware (NEXT) => like controller..
 */
 
-/*Wants to like a post 
-    click the like button => auth middleware (NEXT) => like controller..
-*/
+//Question ?? when do we used this auth middlewarem and the answer is in the routes.
+//we said when somebody likes something in that case we want to use that middleware so: go to
+//server/routes/posts.js

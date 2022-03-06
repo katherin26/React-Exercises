@@ -42,9 +42,9 @@ function Auth() {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(formData, history));
+      dispatch(signup(formData, navigate));
     } else {
-      dispatch(signin(formData, history));
+      dispatch(signin(formData, navigate));
     }
   };
 
@@ -53,7 +53,7 @@ function Auth() {
   };
   const switchMode = () => {
     setSignUp((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   //Now we can use the optional chaining operator ?. we are gonna make sure that we don't have

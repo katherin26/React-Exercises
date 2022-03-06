@@ -60,18 +60,42 @@ export const deletePost = async (req, res) => {
   res.json({ message: "Post deleted successfully" });
 };
 
+/*NOTE: Now we need to modify it so that the users can only like the post once.
+  if user is even authenticated we can do that because we have that special value
+  and that is req.userId.
+  IF NOT req.userId return res.json({message:  'Unanthenticated'})
+  if we call a middleware like this before a specific action like in this case: 
+
+  router.delete('/:id', auth, deletePost); ===> Then you can populate the request and then you'll
+  have access to that request rigth into the next action that you have, so if we go into our 
+  auth if we populate the request.userId if we populate the request.userId then we go 
+  to the next controller in the row which is going to be the like post and now the request is 
+  going to have that user id.  
+  */
+
 export const likePost = async (req, res) => {
   const { id } = req.params;
+
+  if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   if (!Mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No post with that id");
 
   const post = await PostMessage.findById(id);
+
+  const index = post.likes.findIndex((id) => id === String(req.userId));
+  if (index === -1) {
+    //like the post
+    post.likes.push(req.userId);
+  } else {
+    //dislike the post
+    post.likes = post.likes.filter((id) => id !== String(req.userId));
+  }
+
   const updatePost = await PostMessage.findByIdAndUpdate(
     id,
-    {
-      likeCount: post.likeCount + 1,
-    },
+    post,
+
     { new: true }
   );
   res.json(updatePost);

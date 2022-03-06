@@ -10,9 +10,20 @@ import { createPost, updatePost } from "../../actions/posts";
 //if we have a current id then we want to loop over the state.posts
 //and we want to find a post who has the same id of our current id.
 
+/*NOTE:  in the handle submit, dispatch(createPost({...postData,}) we add a new property called name
+  and name is going to be equal to the users that's currently logged in and that user is going to be 
+  in the localstorage , so how do we get the user ?? 
+  const user = JSON.parse(localStorage.getItem('profile));
+  so in the createPost({...postData, name : user?.result?.name}), now is something change we also want 
+  to keep his username so in this case we're also going to do the same thing 
+  crate an object an do this: updatePost(currentId,{...postData, name:user?.result?.name})
+
+  Add an if statement to check if we don't gave a current user , in that case we want to show a card that 
+  says "No you cannot create a post right now"
+*/
+
 function Form({ currentId, setCurrentId }) {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -23,6 +34,7 @@ function Form({ currentId, setCurrentId }) {
   );
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -31,24 +43,36 @@ function Form({ currentId, setCurrentId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      clear();
     } else {
-      dispatch(createPost(postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
+      clear();
     }
-    clear();
   };
   //CLEAR THE IMPUTS
   const clear = () => {
     setCurrentId(null);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: "",
       selectedFile: "",
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to create your own memories and like other's memories.
+        </Typography>
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -61,7 +85,7 @@ function Form({ currentId, setCurrentId }) {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a Memory
         </Typography>
-        <TextField
+        {/* <TextField
           name="creator"
           variant="outlined"
           label="Creator"
@@ -70,7 +94,7 @@ function Form({ currentId, setCurrentId }) {
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
-        />
+        /> */}
         <TextField
           name="title"
           variant="outlined"

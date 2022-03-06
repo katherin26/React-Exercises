@@ -28,6 +28,7 @@ return the req and that can make all these future requests.
 with that our backend is going to get a specific header and then based on that header we can do what we've
 donde here in (server/middleware/auth.js/auth).
 decode the data and based on that the back end is going to know that our user is indeed logged .
+know we continue in server / controllers and posts.js
 
 */
 API.interceptors.request.use((req) => {

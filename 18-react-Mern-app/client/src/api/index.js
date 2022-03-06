@@ -19,5 +19,5 @@ export const deletePost = (id) => API.delete(`'/posts'/${id}`);
 
 //Create the route for the sign in and sign out:
 
-export const signIn = (formData) => API.post("/users/signin", formData);
-export const signUp = (formData) => API.post("/users/signup", formData);
+export const signIn = (formData) => API.post("/user/signin", formData);
+export const signUp = (formData) => API.post("/user/signup", formData);

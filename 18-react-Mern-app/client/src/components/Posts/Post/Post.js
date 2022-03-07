@@ -39,7 +39,7 @@ the current delete button.
 possibility  if the google logged in user or if our manually logged in user is the creator of this post} only 
 if that is the case , we want to shoe the delete button. and we used && and we put the delete button.
 
-
+For the edit button is the same logic.
 
 
 */
@@ -89,15 +89,19 @@ function Post({ post, setCurrentId }) {
           {moment(post.createAt).fromNow()}
         </Typography>
       </div>
-      <div className={classes.overlay2}>
-        <Button
-          style={{ color: "white" }}
-          size="small"
-          onClick={() => setCurrentId(post._id)}
-        >
-          <MoreHorizIcon fontSize="default" />
-        </Button>
-      </div>
+      {(user?.result?.googleId === post?.creator ||
+        user?.result?._id === post?.creator) && (
+        <div className={classes.overlay2}>
+          <Button
+            style={{ color: "white" }}
+            size="small"
+            onClick={() => setCurrentId(post._id)}
+          >
+            <MoreHorizIcon fontSize="default" />
+          </Button>
+        </div>
+      )}
+
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
           {post.tags.map((tag) => `#${tag}`)}

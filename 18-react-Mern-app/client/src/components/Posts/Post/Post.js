@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
@@ -18,9 +19,52 @@ import { deletePost, likePost } from "../../../actions/posts";
 
 /*The body2 is going to be about when the post was created, we can use that moment library installed 
 at the beginning that's gonna be import moment from moment */
+
+/*NOTE: Like implementation: 
+first: we are first checking if a current person likes something or if it didn't like something 
+if we are checking if the likes array contains the id of the current person and that can be either the 
+google id if the person did the auth or it can be a custom id from the database if that is the case 
+we want to say if you and a certain number of people like something or the post has one like or multiple 
+likes you can see the s there and then if the person didn't like it we can just say the number of like or 
+likes and so on and the in nothing happen if you are the first to like it it's just like, 
+NOTE: The user is coming from the const user = localStorage
+
+
+
+
+*/
 function Post({ post, setCurrentId }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          <ThumbUpAltIcon fontSize="small" />
+          &nbsp;
+          {post.likes.length > 2
+            ? `You and ${post.likes.length - 1} others`
+            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize="small" />
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+        </>
+      );
+    }
+
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize="small" />
+        &nbsp;Like
+      </>
+    );
+  };
 
   return (
     <Card className={classes.card}>
@@ -30,7 +74,7 @@ function Post({ post, setCurrentId }) {
         title={post.title}
       />
       <div className={classes.overlay}>
-        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">
           {moment(post.createAt).fromNow()}
         </Typography>
@@ -66,11 +110,10 @@ function Post({ post, setCurrentId }) {
         <Button
           size="small"
           color="primary"
+          disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
-          <ThumbUpAltIcon fontSize="small" />
-          &nbsp; Like &nbsp;
-          {post.likeCount}
+          <Likes />
         </Button>
         <Button
           size="small"

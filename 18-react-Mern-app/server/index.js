@@ -23,7 +23,7 @@ app.use("/user", userRoutes);
 /*Connect our server application with a real database for that we are going to use mongodb more specifically their
 cloud atlas version of mongobd which means they are going to host our database on their cloud .*/
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 /*Mongoose = We use our mongoose to connect our database.
 mongoose.connect(); = is a function that accepts two different parameters first one is going to be CONNECTION URL,

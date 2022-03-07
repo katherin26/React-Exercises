@@ -43,15 +43,14 @@ function Form({ currentId, setCurrentId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
-      clear();
-    } else {
+    if (currentId) {
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
-      clear();
+    } else {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
+    clear();
   };
   //CLEAR THE IMPUTS
   const clear = () => {

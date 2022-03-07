@@ -22,21 +22,25 @@ tag to add the route path.
   //IMPORTANT: React router v6 change the redirect for a function called Redirect , and only you need 
   to add this function insde the route component.
 
-*/
+  //NOTE: Auth : check if the user is logged in , so add a code block and add 
+  const user = JSON.parse(localStorage.getItem('profile)) that way we'll have the access to the user variable.
+  Now depending of the state of the user we can render something different instead of the Auth.
+  there we can add a callback function and said = if not exist user then render <Auth/> and in the other 
+  case redirect to posts.
+  */
 
 function Redirect({ to }) {
   let navigate = useNavigate();
-  console.log(Redirect);
-  console.log(useEffect);
-  console.log(`redirect and useEffect`);
+
   useEffect(() => {
     navigate(to);
   });
   return null;
-  console.log(`redirect and useEffect`);
 }
 
 const App = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   return (
     <BrowserRouter>
       <Container maxWidth="xl">
@@ -45,8 +49,11 @@ const App = () => {
           <Route path="/" element={<Redirect to="/posts" />} />
           <Route path="/posts" element={<Home />} />
           <Route path="/posts/search" element={<Home />} />
-          <Route path="/posts/:id" element={PostDetails} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
+          <Route
+            path="/auth"
+            element={!user ? <Auth /> : <Redirect to="/posts" />}
+          />
         </Routes>
       </Container>
     </BrowserRouter>

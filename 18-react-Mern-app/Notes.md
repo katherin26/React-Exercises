@@ -47,3 +47,12 @@
 
 Create a new folder with a new file called Navbar and styles.js.
 Add the Appbar component.
+
+# **PAGINATION AND SEARCH PART 4**
+
+**Install dependencies**
+
+1. @material-ui/lab = we are going to used this for pagination and some other things.
+2. material-ui-chip-input = This is going to be our input for our tags.
+
+**CRETE A PAGINATION COMPONENT IN SRC**

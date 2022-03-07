@@ -28,6 +28,16 @@ we want to say if you and a certain number of people like something or the post 
 likes you can see the s there and then if the person didn't like it we can just say the number of like or 
 likes and so on and the in nothing happen if you are the first to like it it's just like, 
 NOTE: The user is coming from the const user = localStorage
+NOTE: DELETE AND EDIT LOGIC : We have to disable the btn or action from delete and edit because 
+only the user who create the post is the only one who can delete or edit, for that we are going to use
+a block of code : 
+
+we have to check if the current post was crated from the current user only in that case do we want to show
+the current delete button. 
+
+{ if the currently logged in user via google has the same id as the creator of the post or there as second
+possibility  if the google logged in user or if our manually logged in user is the creator of this post} only 
+if that is the case , we want to shoe the delete button. and we used && and we put the delete button.
 
 
 
@@ -115,14 +125,17 @@ function Post({ post, setCurrentId }) {
         >
           <Likes />
         </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => dispatch(deletePost(post._id))}
-        >
-          <DeleteIcon fontSize="small" />
-          &nbsp; Delete
-        </Button>
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => dispatch(deletePost(post._id))}
+          >
+            <DeleteIcon fontSize="small" />
+            &nbsp; Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

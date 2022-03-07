@@ -3,6 +3,7 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import memories from "../../images/memories.png";
+import decode from "jwt-decode";
 
 import useStyles from "./styles";
 import { LOGOUT } from "../../constants/actionTypes";
@@ -27,8 +28,17 @@ function Navbar() {
     setUser(null);
   };
 
+  /*NOTE: JTW DECODE AND TOKEN EXPIRED: if token exist decode.
+    if the decoded token is expired * 1000 (this is going to be a certain value in milliseconds) if that
+    is lower than new Date() in that case we want to called logout() action.
+  */
   useEffect(() => {
-    //const token = user?.token;
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 

@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
 
-import React from "react";
-
 /*NOTE: count = num of pages,we need to convert this dinamically to fetch the number of pagination.
     page= current page
     renderItem= we are going to return a pagination item.

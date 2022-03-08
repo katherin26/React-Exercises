@@ -34,7 +34,7 @@ export const getPosts = async (req, res) => {
     a tag in this specific array of tags  that matches our query. in there we can say ${in: tags.split(',')}
 */
 
-export const getPostBySearch = async (req, res) => {
+export const getPostsBySearch = async (req, res) => {
   const { searchQuery, tags } = req.query;
   try {
     const title = new RegExp(searchQuery, "i");
@@ -47,6 +47,7 @@ export const getPostBySearch = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
 export const createPost = async (req, res) => {
   const post = req.body;
   console.log(`creating post ${post}`);

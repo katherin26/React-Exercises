@@ -1,13 +1,14 @@
 import express from "express";
-import { getPostsBySearch } from "../../client/src/actions/posts.js";
+//import { getPostsBySearch } from "../../client/src/actions/posts.js";
 import {
-  getPostBySearch,
+  getPostsBySearch,
   getPosts,
   createPost,
   updatePost,
   deletePost,
   likePost,
 } from "../controllers/posts.js";
+
 import auth from "../middleware/auth.js";
 
 const router = express.Router();

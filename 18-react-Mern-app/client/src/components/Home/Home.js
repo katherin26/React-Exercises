@@ -64,11 +64,14 @@ function Home() {
     dispatch(getPosts());
   }, [currentId, dispatch]);
 
-  /*NOTE: Inside the getPostsBySearch we add search, and tags: which we habe to render into a string
+  /*NOTE: Inside the getPostsBySearch we add search, and tags: which we have to render into a string
   because we cannot pass an array through the url parameters, because of that we are gonna do : tags is
   equal to tags.join and we are going to join them by a comma , that way if we have an array of something
   like : [europe, usa] => 'europe,usa' in that way is going to be more easily to pass the data from the 
-  front end to the back end .*/
+  front end to the back end . 
+  
+  let's create that endPoint to the backend side! first go into the routes folder in the posts.js file.
+  */
 
   const searchPost = () => {
     if (search.trim()) {

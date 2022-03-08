@@ -17,7 +17,36 @@ export const getPosts = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+/*NOTE: 
+  QUERY => /posts?page=1 => page = 1
+  PARAMS => /posts/123 => id = 123
 
+  Both ways are fully okay usually we use query, if you want to query some data like search and we 
+  use params, if you want to get some specific resource like posts and then forward /id of the post.
+
+  NOTE: i => ignore case : that means if you search for something like : Test test TEST => test is the same.
+    We converted it into a regular expression in the first place because that way it's easier for mongodb and 
+    mongoose to search the database.
+    FIND= ${$or} that or stands for either find me the title or find me the tags, we want to find the posts
+    that match either or so we can make that into an array. and then the first thing there is going to be, 
+    the [{title}], the second thing in that array is gonna be tags, keep in mind there is an array of 
+    tags. So inside of there we are going to open another object and we are gonna say = ${in}, is there 
+    a tag in this specific array of tags  that matches our query. in there we can say ${in: tags.split(',')}
+*/
+
+export const getPostBySearch = async (req, res) => {
+  const { searchQuery, tags } = req.query;
+  try {
+    const title = new RegExp(searchQuery, "i");
+    const posts = await PostMessage.find({
+      $or: [{ title }, { tags: { $in: tags.split(",") } }],
+    });
+
+    res.json({ data: posts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 export const createPost = async (req, res) => {
   const post = req.body;
   console.log(`creating post ${post}`);

@@ -1,5 +1,7 @@
 import express from "express";
+import { getPostsBySearch } from "../../client/src/actions/posts.js";
 import {
+  getPostBySearch,
   getPosts,
   createPost,
   updatePost,
@@ -27,7 +29,7 @@ const router = express.Router();
  if they're logged in or not they can see all the posts but to create a post you need to have 
  your own id, you need to be logged in. */
 
-router.get("/", getPosts);
+router.get("/search", getPostsBySearch);
 router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost); //this is going to be managed in the frontend.
 router.delete("/:id", auth, deletePost); //this is going to be managed in the frontend.

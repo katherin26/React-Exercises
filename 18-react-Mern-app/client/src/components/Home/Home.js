@@ -34,6 +34,14 @@ be on the first one.
 Finally we are going to have a search query, so we can say : const searchQuery = query.get('searchQuery);
 
 Inside  the value we need to add the state , we need to add const [search,SetSearch] and add the search into the value.
+
+UseEffect = useDispatch 
+we need to tell the database to only return us the posts that match, our query to send a nice message to the 
+database. we can use redux, first let's create a redux action and a reducer to manage our posts.
+
+Dispatch is the verb that we use with actions, so to have something to dispatch we need to create an action 
+for searching the posts. to do that we can open up our file explorer go to actions / posts then inside of there
+just below our previous get posts we want to create an action called get post by search.
 */
 
 function useQuery() {
@@ -56,9 +64,17 @@ function Home() {
     dispatch(getPosts());
   }, [currentId, dispatch]);
 
+  const searchPost = () => {
+    if (search.trim()) {
+      //dispatch => fetch search post
+    } else {
+      navigation("/");
+    }
+  };
+
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      //search post
+      searchPost();
     }
   };
 
@@ -105,6 +121,14 @@ function Home() {
                 label="Search tags"
                 variant="outlined"
               />
+              <Button
+                onClick={searchPost}
+                className={classes.searchButton}
+                color="primary"
+                variant="contained"
+              >
+                Search
+              </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>

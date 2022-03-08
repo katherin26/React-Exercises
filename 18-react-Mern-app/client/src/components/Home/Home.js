@@ -15,6 +15,7 @@ import Pagination from "../Pagination/Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import useStyles from "../../styles.js";
+import useStyles from "./styles";
 import ChipInput from "material-ui-chip-input";
 
 /*NOTE: with useDispatch= we used this for dispatch an action. We need to define that dispatch so we need
@@ -56,18 +57,33 @@ function Home() {
 
   return (
     <Grow in>
-      <Container>
+      <Container maxWidth="xl">
         <Grid
           className={classes.mainContainer}
           container
           justify="space-between"
           alignItems="stretch"
           spacing={3}
+          className={classes.gridContainer}
         >
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={12} sm={7} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={3}>
+            <AppBar
+              className={classes.appBarSearch}
+              position="static"
+              color="inherit"
+            >
+              <TextField
+                name="search"
+                variant="outlined"
+                label="Search Memories"
+                fullWidth
+                value="TEST"
+                onChange={() => {}}
+              />
+            </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
               {" "}

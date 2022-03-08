@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+import { getPosts, getPostsBySearch } from "../../actions/posts";
 import Pagination from "../Pagination/Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
@@ -64,9 +64,15 @@ function Home() {
     dispatch(getPosts());
   }, [currentId, dispatch]);
 
+  /*NOTE: Inside the getPostsBySearch we add search, and tags: which we habe to render into a string
+  because we cannot pass an array through the url parameters, because of that we are gonna do : tags is
+  equal to tags.join and we are going to join them by a comma , that way if we have an array of something
+  like : [europe, usa] => 'europe,usa' in that way is going to be more easily to pass the data from the 
+  front end to the back end .*/
+
   const searchPost = () => {
     if (search.trim()) {
-      //dispatch => fetch search post
+      dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
     } else {
       navigation("/");
     }

@@ -19,6 +19,15 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
+//Go to api/index and create fetchPostsBySearch.
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPostsBySearch(searchQuery);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 //we need to dispatch this action , so we go into the Form.js and import that use dispatch from
 //react-redux.
 

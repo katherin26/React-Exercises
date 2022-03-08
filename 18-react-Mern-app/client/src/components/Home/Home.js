@@ -14,7 +14,7 @@ import { getPosts } from "../../actions/posts";
 import Pagination from "../Pagination/Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import useStyles from "../../styles.js";
+
 import useStyles from "./styles";
 import ChipInput from "material-ui-chip-input";
 
@@ -33,8 +33,7 @@ be on the first one.
 
 Finally we are going to have a search query, so we can say : const searchQuery = query.get('searchQuery);
 
-
-u
+Inside  the value we need to add the state , we need to add const [search,SetSearch] and add the search into the value.
 */
 
 function useQuery() {
@@ -50,10 +49,24 @@ function Home() {
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
+  const [search, setSearch] = useState("");
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
+
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      //search post
+    }
+  };
+
+  //NOTE:When you have an array as the state, you first have to spread the previous tags and then add the new tag onto it.
+  const handleAdd = (tag) => setTags([...tags, tag]);
+  //NOTE: We want to filter out the tag to delete, so we can say : if tag is not equal to tagToDelete
+  const handleDelete = (tagToDelete) =>
+    setTags(tags.filter((tag) => tag !== tagToDelete));
 
   return (
     <Grow in>
@@ -79,9 +92,18 @@ function Home() {
                 name="search"
                 variant="outlined"
                 label="Search Memories"
+                onKeyPress={handleKeyPress}
                 fullWidth
-                value="TEST"
-                onChange={() => {}}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <ChipInput
+                style={{ margin: "10px 0" }}
+                value={tags}
+                onAdd={handleAdd}
+                onDelete={handleDelete}
+                label="Search tags"
+                variant="outlined"
               />
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />

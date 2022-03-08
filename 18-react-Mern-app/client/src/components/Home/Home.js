@@ -60,10 +60,6 @@ function Home() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   /*NOTE: Inside the getPostsBySearch we add search, and tags: which we have to render into a string
   because we cannot pass an array through the url parameters, because of that we are gonna do : tags is
   equal to tags.join and we are going to join them by a comma , that way if we have an array of something
@@ -71,11 +67,16 @@ function Home() {
   front end to the back end . 
   
   let's create that endPoint to the backend side! first go into the routes folder in the posts.js file.
+  
+  
   */
 
   const searchPost = () => {
-    if (search.trim()) {
+    if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+      navigation(
+        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+      );
     } else {
       navigation("/");
     }
@@ -142,7 +143,7 @@ function Home() {
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
               {" "}
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>

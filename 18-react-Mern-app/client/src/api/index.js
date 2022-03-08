@@ -40,7 +40,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchPosts = () => API.get("/posts");
+export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 //NOTE:The endpoint is going to be posts/search/ but inside of there we are gonna use query parameters.
 //Query parameters start with the ? and then you specified a variable name. (search?searchQuery=)
 export const fetchPostsBySearch = (searchQuery) =>

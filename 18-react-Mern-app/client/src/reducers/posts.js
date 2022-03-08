@@ -6,7 +6,13 @@ Usually you are going to have multiple if statements for a lot of different thin
 people prefer to have the switch statement and this is how it works.
 */
 
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
+import {
+  FETCH_ALL,
+  CREATE,
+  UPDATE,
+  DELETE,
+  FETCH_BY_SEARCH,
+} from "../constants/actionTypes";
 
 export default (posts = [], action) => {
   switch (action.type) {
@@ -17,6 +23,8 @@ export default (posts = [], action) => {
         post._id === action.payload._id ? action.payload : post
       );
     case FETCH_ALL:
+      return action.payload;
+    case FETCH_BY_SEARCH:
       return action.payload;
 
     case CREATE:

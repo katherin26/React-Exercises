@@ -9,6 +9,7 @@ import Mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
 export const getPosts = async (req, res) => {
+  const { page } = req.query;
   try {
     const postMessages = await PostMessage.find();
 

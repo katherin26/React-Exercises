@@ -40,6 +40,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export const fetchPost = (id) => API.get(`/posts/${id}`);
 //NOTE: Now we are passing the data to the backend, just so we know on which page are we currently on
 //Go to server/controllers/posts.js
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);

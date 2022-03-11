@@ -2,6 +2,7 @@ import express from "express";
 //import { getPostsBySearch } from "../../client/src/actions/posts.js";
 import {
   getPostsBySearch,
+  getPost,
   getPosts,
   createPost,
   updatePost,
@@ -32,6 +33,7 @@ const router = express.Router();
 
 router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
+router.get("/:id", getPost);
 router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost); //this is going to be managed in the frontend.
 router.delete("/:id", auth, deletePost); //this is going to be managed in the frontend.

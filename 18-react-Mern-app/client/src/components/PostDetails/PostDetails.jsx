@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router";
 import moment from "moment";
 import useStyles from "./styles";
+import { getPosts } from "../../actions/posts";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -16,6 +17,18 @@ const PostDetails = () => {
   const navigation = useNavigate();
   const classes = useStyles();
   const { id } = useParams();
+
+  /*NOTE: This useEffect is going to happen whenever the id of the post changes, right inside of there 
+  we can dispatch an action and the action that we want to dispatch is called getPost() 
+  we want to get the post by some specific id, so we can pass that id in there 
+
+  NOTE: KNow is the time that we create this action and make an api to the back end that's going to serve us 
+  all the details about our specific post. Go to actions posts.js
+  */
+
+  useEffect(() => {
+    dispatch(getPosts(id));
+  }, [id]);
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
       <div className={classes.card}>
@@ -59,6 +72,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
+      {/*Recommended posts */}
     </Paper>
   );
 };

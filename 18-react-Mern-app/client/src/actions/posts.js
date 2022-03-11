@@ -15,9 +15,19 @@ the type and the
 payload: is usually the data where we store all of our posts.
 with redux thunk since we'll be dealing with asynchronous logic we have to add this async dispatch 
 function in front of it and then instead of returning the action we have to dispatch it to actually 
-
-
 */
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchPost(id);
+
+    dispatch({ type: FETCH_POST, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getPosts = (page) => async (dispatch) => {
   try {

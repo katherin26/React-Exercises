@@ -13,10 +13,16 @@ import {
   DELETE,
   FETCH_BY_SEARCH,
   LIKE,
+  START_LOADING,
+  END_LOADING,
 } from "../constants/actionTypes";
 
 export default (state = { posts: [] }, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     case DELETE:
       return state.posts.filter((post) => post.id !== action.payload);
     case UPDATE:

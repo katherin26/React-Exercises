@@ -10,10 +10,12 @@ import { useSelector } from "react-redux";
 import useStyles from "../Posts/style";
 
 function Posts({ setCurrentId }) {
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.posts); // [] => {posts: []}
+  console.log(`posts`);
+  console.log(posts);
   const classes = useStyles();
 
-  return !posts.length ? (
+  return !posts?.length ? (
     <CircularProgress />
   ) : (
     <Grid
@@ -22,7 +24,7 @@ function Posts({ setCurrentId }) {
       alignItems="stretch"
       spacing={3}
     >
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <Grid key={post._id} item xs={12} sm={6} md={6}>
           <Post post={post} setCurrentId={setCurrentId} />
         </Grid>

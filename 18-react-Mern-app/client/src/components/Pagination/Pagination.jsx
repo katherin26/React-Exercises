@@ -13,7 +13,7 @@ import useStyles from "./styles";
     we are going to import this inside the of our Home component.
 */
 function Paginate({ page }) {
-  const { numberOfPages } = useSelector((state) => state.posts);
+  const { numberOfPages } = useSelector((state) => state.posts.posts);
   console.log(`Number of pages, ${numberOfPages}`);
   const classes = useStyles();
   const dispatch = useDispatch();

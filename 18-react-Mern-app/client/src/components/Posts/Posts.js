@@ -10,12 +10,12 @@ import { useSelector } from "react-redux";
 import useStyles from "../Posts/style";
 
 function Posts({ setCurrentId }) {
-  const posts = useSelector((state) => state.posts.posts); // [] => {posts: []}
-  console.log(`posts`);
-  console.log(posts);
+  const { posts, isLoading } = useSelector((state) => state.posts); // [] => {posts: []}
+
   const classes = useStyles();
 
-  return !posts?.length ? (
+  if (!posts.length && !isLoading) return "No posts";
+  return isLoading ? (
     <CircularProgress />
   ) : (
     <Grid

@@ -31,6 +31,7 @@ const router = express.Router();
  your own id, you need to be logged in. */
 
 router.get("/search", getPostsBySearch);
+router.get("/", getPosts);
 router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost); //this is going to be managed in the frontend.
 router.delete("/:id", auth, deletePost); //this is going to be managed in the frontend.

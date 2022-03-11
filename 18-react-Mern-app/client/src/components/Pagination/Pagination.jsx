@@ -16,6 +16,9 @@ function Paginate({ page }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  //WIth this useeffect we want to fetch the post any time that the page changes to fetch the posts as
+  //always we're going to use our dispatch with redux.
+
   useEffect(() => {
     if (page) dispatch(getPosts(page));
   }, [page]);

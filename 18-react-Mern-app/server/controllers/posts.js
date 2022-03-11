@@ -7,13 +7,32 @@ So in the try we need to retrieve all the posts that we currently have in the da
 
 import Mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
+//NOTE: It's gonna be the limit of posts per page.
+//NOTE: StartIndex on a post on a specific page for example, The start INDEX of the first post on the third
+//page would be 8 + 8 + 8 -1 because we start from 0. and that would be 23.
+//First we need to convert our page into a Number using the number constructor even though the page is a number
+//on the front end when we pass it through the reg.query it becomes a string so we have to convert it back.
+//and know we are simply going to deduct -1 from that. and finally multiply all of that by the limit.
+//In this way we're always going to get the start index of the post on a specific page.
+//NOTE: sort() = the post to the newest to the oldest and sort them by id. and the limit is 8.
+//Know we are passing all this data back to the front end, go to actions / posts.js
 
 export const getPosts = async (req, res) => {
   const { page } = req.query;
   try {
-    const postMessages = await PostMessage.find();
+    const LIMIT = 8;
+    const startIndex = (Number(page) - 1) * LIMIT; //get the starting index of every page.
+    const total = await PostMessage.countDocuments({});
+    const posts = await PostMessage.find()
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
 
-    res.status(200).json(postMessages);
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

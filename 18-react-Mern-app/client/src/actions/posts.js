@@ -17,11 +17,13 @@ function in front of it and then instead of returning the action we have to disp
 */
 
 export const getPosts = (page) => async (dispatch) => {
+  console.log(`calling api`);
   try {
     const { data } = await api.fetchPosts(page);
+    console.log(data);
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -32,6 +34,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
       data: { data },
     } = await api.fetchPostsBySearch(searchQuery);
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
+    console.log(data);
   } catch (error) {
     console.log(error);
   }

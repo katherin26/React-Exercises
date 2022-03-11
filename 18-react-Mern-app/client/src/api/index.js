@@ -40,6 +40,8 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+//NOTE: Now we are passing the data to the backend, just so we know on which page are we currently on
+//Go to server/controllers/posts.js
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 //NOTE:The endpoint is going to be posts/search/ but inside of there we are gonna use query parameters.
 //Query parameters start with the ? and then you specified a variable name. (search?searchQuery=)

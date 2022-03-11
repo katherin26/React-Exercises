@@ -7,7 +7,7 @@ import memoriesText from "../../images/memories-Text.png";
 import decode from "jwt-decode";
 
 import useStyles from "./styles";
-import { LOGOUT } from "../../constants/actionTypes";
+import * as actionType from "../../constants/actionTypes";
 
 /*NOTE: Component={Link} to="/" this point to our main route.
 2. if user exits then we are going to show his information and if not we show nothing.
@@ -24,7 +24,7 @@ function Navbar() {
   const location = useLocation();
 
   const logout = () => {
-    dispatch({ type: LOGOUT });
+    dispatch({ type: actionType.LOGOUT });
     navigate("/auth");
     setUser(null);
   };
@@ -38,6 +38,7 @@ function Navbar() {
 
     if (token) {
       const decodedToken = decode(token);
+
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     setUser(JSON.parse(localStorage.getItem("profile")));

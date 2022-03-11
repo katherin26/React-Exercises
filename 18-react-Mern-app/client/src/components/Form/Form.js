@@ -74,7 +74,7 @@ function Form({ currentId, setCurrentId }) {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete="off"
         noValidate
@@ -82,18 +82,9 @@ function Form({ currentId, setCurrentId }) {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? "Editing" : "Creating"} a Memory
+          {currentId ? "Editing" : "Creating  a Memory"}
         </Typography>
-        {/* <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        /> */}
+
         <TextField
           name="title"
           variant="outlined"

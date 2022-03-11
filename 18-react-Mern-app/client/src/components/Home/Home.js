@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grow,
@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPosts, getPostsBySearch } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 import Pagination from "../Pagination/Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
@@ -143,7 +143,7 @@ function Home() {
             <Form currentId={currentId} setCurrentId={setCurrentId} />
 
             {!searchQuery && !tags.length && (
-              <Paper elevation={6}>
+              <Paper elevation={6} className={classes.pagination}>
                 <Pagination page={page} />
               </Paper>
             )}

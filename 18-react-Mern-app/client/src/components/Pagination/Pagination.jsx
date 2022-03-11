@@ -22,8 +22,10 @@ function Paginate({ page }) {
   //always we're going to use our dispatch with redux.
 
   useEffect(() => {
-    if (page) dispatch(getPosts(page));
-  }, [page]);
+    if (page) {
+      dispatch(getPosts(page));
+    }
+  }, [dispatch, page]);
 
   return (
     <Pagination

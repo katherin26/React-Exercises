@@ -6,15 +6,15 @@ import {
   Divider,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Navigate } from "react-router";
 import moment from "moment";
 import useStyles from "./styles";
-import { getPosts } from "../../actions/posts";
+import { getPost, getPostsBySearch } from "../../actions/posts";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const classes = useStyles();
   const { id } = useParams();
 
@@ -27,8 +27,29 @@ const PostDetails = () => {
   */
 
   useEffect(() => {
-    dispatch(getPosts(id));
+    dispatch(getPost(id));
   }, [id]);
+
+  useEffect(() => {
+    dispatch(getPostsBySearch({ search: "none", tags: post?.tags.join(",") }));
+  }, [post]);
+
+  if (!post) return null;
+
+  if (isLoading) {
+    return (
+      <Paper elevation={6} className={classes.loadingPaper}>
+        <CircularProgress />
+      </Paper>
+    );
+  }
+
+  /*NOTE: Inside of this we want to get our specific post but more specifically we want to destructure 
+  the _id at the end we want to keep all the posts but delete the one where the id_ === post._id */
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+
+  const openPost = (_id) => navigate(`/posts/${_id}`);
+
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
       <div className={classes.card}>
@@ -72,7 +93,39 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {/*Recommended posts */}
+      {recommendedPosts.length && (
+        <div className={classes.section}>
+          <Typography gutterBottom variant="h5">
+            You might also like:
+          </Typography>
+          <Divider />
+          <div className={classes.recommendedPosts}>
+            {recommendedPosts.map(
+              ({ title, message, name, likes, selectedFile, _id }) => (
+                <div
+                  style={{ margin: "20px", cursor: "pointer" }}
+                  onClick={() => openPost(_id)}
+                  key={_id}
+                >
+                  <Typography gutterBottom vatiant="h6">
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom vatiant="subtitle2">
+                    {name}
+                  </Typography>
+                  <Typography gutterBottom vatiant="subtitle2">
+                    {message}
+                  </Typography>
+                  <Typography gutterBottom vatiant="subtitle1">
+                    {likes.length}
+                  </Typography>
+                  <img src={selectedFile} width="200px" />
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
     </Paper>
   );
 };

@@ -11,6 +11,7 @@ import {
   CREATE,
   UPDATE,
   DELETE,
+  FETCH_POST,
   FETCH_BY_SEARCH,
   LIKE,
   START_LOADING,
@@ -44,6 +45,8 @@ export default (state = { isLoading: true, posts: [] }, action) => {
       };
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload.data };
+    case FETCH_POST:
+      return { ...state, post: action.payload.data };
 
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };

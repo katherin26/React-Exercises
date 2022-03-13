@@ -58,10 +58,12 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
 //we need to dispatch this action , so we go into the Form.js and import that use dispatch from
 //react-redux.
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, navigate) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
+
+    navigate(`/posts/${data._id}`);
 
     dispatch({ type: CREATE, payload: data });
   } catch (error) {

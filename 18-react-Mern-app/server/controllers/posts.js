@@ -164,3 +164,31 @@ export const likePost = async (req, res) => {
   );
   res.json(updatePost);
 };
+
+/*
+NOTE: we have the req.params from (client/src/api/index.js) inside the API we have the ${id}  if we look
+into routes we found (:id) and this id is dynamic. and that is what populates the id right here 
+in req.params
+NOTE: So what happens with the req.body , if we took a look at out request API we are passing that object  
+that contains the value and that's what's populating this value, that's basically the value of our comment.
+NOTE: Know we used those values to create a comment in the database, first we need to fetch the post that
+we have to put our comment on.
+so we create const post = await PostMessagge.findById(id) = We are getting data from the dataBase.
+Then we are adding the comment to that post 
+and then we are updating the database so that the new post contains that new comment.
+Finally we are storing the value of that post in our updated post variable ,
+once we have that we can return : res.json(updatedPost) and we can receive back in the frontEnd.
+*/
+export const commentPost = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+
+  const post = await PostMessage.findById(id);
+
+  post.comments.push(value);
+
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  });
+  res.json(updatePost);
+};

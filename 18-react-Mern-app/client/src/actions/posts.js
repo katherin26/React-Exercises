@@ -91,9 +91,15 @@ export const deletePost = (id) => async (dispatch) => {
 
 export const likePost = (id) => async (dispatch) => {
   try {
-    const { data } = await api.likePost(id);
+    const { data } = await api.likePost(id, user?.token);
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error);
   }
+};
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    await api.comment(value, id);
+  } catch (error) {}
 };

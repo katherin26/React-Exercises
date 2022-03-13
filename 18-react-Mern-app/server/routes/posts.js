@@ -8,6 +8,7 @@ import {
   updatePost,
   deletePost,
   likePost,
+  commentPost,
 } from "../controllers/posts.js";
 
 import auth from "../middleware/auth.js";
@@ -38,5 +39,7 @@ router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost); //this is going to be managed in the frontend.
 router.delete("/:id", auth, deletePost); //this is going to be managed in the frontend.
 router.patch("/:id/likePost", auth, likePost);
+router.post("/:id/commentPost", auth, commentPost); //This comment post is going to be a function in the backend
+//that's going to handle the creation of the comment.
 
 export default router;

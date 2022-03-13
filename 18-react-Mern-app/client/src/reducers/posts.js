@@ -44,10 +44,9 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         numberOfpages: action.payload.numberOfpages,
       };
     case FETCH_BY_SEARCH:
-      return { ...state, posts: action.payload.data };
+      return { ...state, posts: action.payload.data ?? [] };
     case FETCH_POST:
-      return { ...state, post: action.payload.data };
-
+      return { ...state, post: action.payload };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };
 

@@ -13,6 +13,8 @@ import { getPost, getPostsBySearch } from "../../actions/posts";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
+  console.log("State in PostDetails");
+  console.log({ post, posts, isLoading });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -31,7 +33,11 @@ const PostDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    dispatch(getPostsBySearch({ search: "none", tags: post?.tags.join(",") }));
+    if (post) {
+      dispatch(
+        getPostsBySearch({ search: "none", tags: post?.tags.join(",") })
+      );
+    }
   }, [post]);
 
   if (!post) return null;

@@ -6,10 +6,8 @@ import { actionCreators } from "./state/index";
 
 function App() {
   const account = useSelector((state) => state.account);
-  console.log(`this is account`, account);
   const dispatch = useDispatch();
 
-  console.log(actionCreators);
   const { depositMoney, withdrawMoney } = bindActionCreators(
     actionCreators,
     dispatch

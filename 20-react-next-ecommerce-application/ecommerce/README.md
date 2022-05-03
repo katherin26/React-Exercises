@@ -26,3 +26,19 @@
     1. sanity docs
     2. sanity manage
 ```
+
+**How to work with sanity??**
+
+```
+1. Move to the folder : sanity_ecommerce
+2. sanity start
+3. Login with Google
+
+```
+
+**Next step : Go to schemas**
+
+```
+1. Create a new file.
+2. Product.jss
+```

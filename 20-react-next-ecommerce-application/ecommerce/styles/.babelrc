@@ -1,3 +1,5 @@
 {
-  "preset": ["next/babel", "@babel/preset-react"]
+  "preset": ["@babel/preset-react"]
 }
+
+//NOTE: @babel/preset-react: helps to translate the jsx document into index.js

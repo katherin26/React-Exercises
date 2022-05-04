@@ -42,3 +42,8 @@
 1. Create a new file.
 2. Product.jss
 ```
+
+**What do we need to do to connect our application to sanity**
+
+1. Create a folder called : lib (as in library).
+2. Create a file called client.js (and this is going to be for our sanity client).

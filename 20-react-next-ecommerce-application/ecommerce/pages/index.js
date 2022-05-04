@@ -1,5 +1,5 @@
 import React from "react";
-import { client } from "../lib/client";
+import { client } from "./components/lib/client";
 import { Product, FooterBanner, HeroBanner } from "./components";
 
 /*IMPORTANT: For fetch data we use something known as get server side props.
@@ -16,10 +16,19 @@ import { Product, FooterBanner, HeroBanner } from "./components";
    
    */
 
+/*NOTE: When we console.log(bannerData) we see into the console [] , we should run 
+sanity start and then add the data into the banner.
+Add a new element , add the image, add the button text, add product, add Desc, add 
+smallText, add MidText, add LargeText, addLargeText2, add discount and finally add 
+SaleTime.
+*/
+
 function Home({ products, bannerData }) {
+  console.log(bannerData);
   return (
     <>
       <HeroBanner />
+
       <div className="products-heading">
         <h2>Best gaming products</h2>
         <p>Speakers of many variations</p>
@@ -38,7 +47,7 @@ export const getServerSideProps = async () => {
 
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
-
+  console.log({ products, bannerData });
   return {
     props: { products, bannerData },
   };

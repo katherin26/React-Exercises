@@ -23,11 +23,19 @@ smallText, add MidText, add LargeText, addLargeText2, add discount and finally a
 SaleTime.
 */
 
+/*When we go back to the console, you can see an array with an object with all the data
+we just passed in. */
+
+/*heroBanner: if bannerData.length exists then we want to pass  banner.data[0] 
+  when we go back to the HeroBanner we pass the heroBanner prop. and know we can use it
+  to display dinamic data.
+*/
+
 function Home({ products, bannerData }) {
   console.log(bannerData);
   return (
     <>
-      <HeroBanner />
+      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
 
       <div className="products-heading">
         <h2>Best gaming products</h2>
@@ -40,6 +48,8 @@ function Home({ products, bannerData }) {
     </>
   );
 }
+
+//NOTE: Fetching the data.
 
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';

@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <div className="navbar-container">
       <p className="logo">
-        <Link href="/">TOOL Kit</Link>
+        <Link href="/">NAV BAR</Link>
       </p>
 
       <button type="button" className="cart-icon" onClick="">

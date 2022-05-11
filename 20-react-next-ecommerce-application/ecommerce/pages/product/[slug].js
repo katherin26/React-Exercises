@@ -7,6 +7,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { Product } from "../components";
+import { useStateContext } from "../../context/StateContext";
 
 /*NOTE: [slug] That means is going to be dynamic 
         example:
@@ -28,6 +29,7 @@ to be statically generated.
 const ProductDetails = ({ product, products }) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
+  const { decQty, incQty, qty } = useStateContext();
   return (
     <div>
       <div>
@@ -70,11 +72,13 @@ const ProductDetails = ({ product, products }) => {
         <div className="quantity">
           <h3>Quantity:</h3>
           <p className="quantity-desc">
-            <span className="minus" onClick="">
+            <span className="minus" onClick={decQty}>
               <AiOutlineMinus />
             </span>
-            <span className="num">0</span>
-            <span className="plus" onClick="">
+            <span className="num" onClick="">
+              {qty}
+            </span>
+            <span className="plus" onClick={incQty}>
               <AiOutlinePlus />
             </span>
           </p>

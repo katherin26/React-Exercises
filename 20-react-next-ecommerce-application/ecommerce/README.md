@@ -3,7 +3,7 @@
 //NOTE: This is going to make sure to install exactly the same versions of packages.
 
 1. **npm intall :** --legacy-peer-deps
-2. **npm run dev**
+2. **npm run dev** //RUN THE APPLICATION
 
 ## **Sanity**
 

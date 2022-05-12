@@ -33,6 +33,7 @@ we just passed in. */
 
 function Home({ products, bannerData }) {
   console.log(bannerData);
+
   return (
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />

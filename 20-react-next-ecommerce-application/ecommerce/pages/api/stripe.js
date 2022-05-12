@@ -13,7 +13,6 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body.cartItems);
     try {
       const params = {
         submit_type: "pay",
@@ -24,7 +23,7 @@ export default async function handler(req, res) {
           { shipping_rate: "shr_1KyiN1JAbwWs85QgAwHkNVMl" },
           { shipping_rate: "shr_1KyiKfJAbwWs85QggyH41Vr5" },
         ],
-        line_items: req.body.cartItems.map((item) => {
+        line_items: req.body.map((item) => {
           const img = item.image[0].asset._ref;
           const newImage = img
             .replace(
@@ -44,7 +43,7 @@ export default async function handler(req, res) {
             },
             adjustable_quantity: {
               enabled: true,
-              minimun: 1,
+              minimum: 1,
             },
             quantity: item.quantity,
           };

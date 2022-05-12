@@ -105,6 +105,9 @@ export default function StateContext({ children }) {
       value={{
         showCart,
         setShowCart,
+        setCartItems,
+        setTotalQuantities,
+        setTotalPrice,
         cartItems,
         totalPrice,
         totalQuantities,

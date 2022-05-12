@@ -1,2 +1,2 @@
-# **Basic Exercise Reduxx**
+# **Basic Exercise Redux**
 

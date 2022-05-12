@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# **CREATING AN ARTIFICIAL INTELLIGENCE REACT APP, ALAN AI**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Install dependecies** :
 
-## Available Scripts
+1. npm i @alan-ai/alan-sdk-web : This is going to allow us to use all the voice capabilities.
+2. @material-ui/core : That's the ui kit we are going to use for styling
+3. classnames: because we are going to have multiple components that have multiple class names.
+4. words-to-numbers: when we use the command open article number 15 we need to parse the words 15 to actual numbers .
 
-In the project directory, you can run:
+## **ALAN I**
 
-### `npm start`
+1. in (studio.alan.app) ===> or just look in google Alan AI
+2. Create a new project
+3. we can see an intent('hello world', p => { p.play('(hello|hi there))}) ===> **This is your voice command and the response.**
+   4.How do we actually connect it and get the key, well you go to :
+   ** </> Integrations** and then in here you get the **Alan SDK Key** you just copy it , go back to our
+   application and simply paste it there.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. Now we can make Alan listen for certain commands inside the useEffect.
+5. Now if you wanna tested you write the following in an if statement:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+onCommand: ({command}) => {
+    if(command === 'testCommand'){
+        alert('This code was executed');
+    }
+}
+```
 
-### `npm test`
+and back in the page you write the following =
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+intent('What does this app do ?' , 'What can I do here?',
+    reply('This is a news Project.'));
+)
+```
 
-### `npm run build`
+back in the localhost you can see be alanBtn and iteract with the same queries or questions.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+6. How do we trigger this test command right there , for that we need to make an intent but instead of replying something , we have to trigger a command on the response and in there we can also trigger a
+   callback function on our command.
+   In the callback function we get access to the p instance, that's basically playing anything you want and then we can call that p and we can p.play this is going to be the same as response.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+ntent('Start a command', (p) => {
+    p.play('Hello, I understood your command.')
+})
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+7. For all the data in the application , we're going to use the news api . : **newsapi.org**
+   and in there we can get the API key. and we paste downbelow of the intent.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   we need to create an endpoint for news by source . and we need to make it dynamic with $(source* (.*))
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+    intent('Give me the news from $(source* (.*))', (p) => {
+       let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+       if(p.source.value){
+           NEWS_API_URL = `${NEWS_API_URL}&sources=${p.source.value.toLowerCase().split(" ").join('-')}`
+          }
+       })
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Note: we start with an intent 'Give me the news from' and we make it dynamic with this syntax.
+$(nameofthevariable\*) then an astetisk and then you can specify what can a user say to put that data
+inside the parenthesis , so that's going to be parentheses. (.\*)
 
-## Learn More
+NOTE: &sources=${p.source.value.toLowerCase().split(" " }.join('-')
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Why are we doing that ??? because in the api is bbc-news and alan will understand BBC News, so to do that we need to lowercase then split the words and join it using a -.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+8. Using Alan you already have built-in functionalities of creating api calls, we also have axios built in but let's just use their **api.request** the first thing is gonna accept is NEWS_API_URL , and then
+   receive a callback function that receive three parameters.
 
-### Code Splitting
+```
+error
+response
+body
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+and the in there we can get the actual data using the body parameter.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+We have the articles we are going to do one simple if , if maybe articles were not fetched because
+someone gave us a wrong source so we are going to do is =
 
-### Making a Progressive Web App
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Example :
 
-### Advanced Configuration
+if (no article.length) = if that's the case we're going to do p.play('Soryyy,, please try another source etcc..)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+9. **Populate the articles**
 
-### Deployment
+Create a global variable called : let saveArticles = [];
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+and for populated we = savedArticles = articles;
 
-### `npm run build` fails to minify
+10. Once we have the articles we can do the same thing that we just did which is open curly braces and
+    then say **{command : "newHeadLines"}** , with the command we can pass also some data, in this case
+    the data we'll be passing is the **articles**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+p.play({command : "newHeadLines", articles})
+```
+
+Once we add the command , we can do another p.play().
+When we add the parenthesis with the latest and recent , sometimes alan is gonna read the latest
+and sometimes the recent. Just so he doesn't sound boring he's actually going to change words and sound
+more human and then on that we can open the ${} curlybraces and say ${p.source.value} news.
+
+```
+p.play(`Here are the (latest | recent) ${p.source.value} news.)
+
+```
+
+//NOTE: THEN IN ALAN AI , We can add new intets for search for : latest news, latetst technology news, terms and sources.

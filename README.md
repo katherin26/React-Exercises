@@ -1,6 +1,6 @@
 # React_mini_projects
 Folder with a list of all my mini projects for practice 
-
+```
 1.React, 
 2.Redux, 
 3.Redux Thunk, 
@@ -17,3 +17,4 @@ Folder with a list of all my mini projects for practice
 14.Next.js
 15.Sass
 16.Tailwind.css
+```

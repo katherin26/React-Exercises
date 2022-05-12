@@ -47,3 +47,13 @@
 
 1. Create a folder called : lib (as in library).
 2. Create a file called client.js (and this is going to be for our sanity client).
+
+## **STRIPE**
+
+1. Stripe.com
+2. Open an account
+3. Copy and paste the public key and the secret key.
+
+**Custom payment flow**
+
+prebuilt Checkout page | Custom payment flow

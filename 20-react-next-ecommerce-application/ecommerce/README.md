@@ -48,7 +48,7 @@
 1. Create a folder called : lib (as in library).
 2. Create a file called client.js (and this is going to be for our sanity client).
 
-## **STRIPE**
+## **PAYMENT WITH STRIPE**
 
 1. Stripe.com
 2. Open an account

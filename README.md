@@ -1,7 +1,7 @@
 # React_mini_projects
 Folder with a list of all my mini projects for practice 
 
-## **Subjects**
+## **Tecnologies**
 ```
 1.React, 
 2.Redux, 
